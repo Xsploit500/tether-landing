@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tether — Never Lose Touch</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="Tether gently reminds you to reach out to the people who matter — before weeks turn into months without a word. The people you love deserve more than good intentions.">
+<meta name="theme-color" content="#2A6B3C">
+
+<!-- ── SOCIAL SHARING (Open Graph) ── -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://staytether.com">
+<meta property="og:title"       content="Tether — Never Lose Touch">
+<meta property="og:description" content="The people you love deserve more than good intentions. Tether reminds you to stay in touch with your circle before weeks turn into months.">
+<meta property="og:image"       content="https://staytether.com/og-image.png">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- ── TWITTER CARD ── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:url"         content="https://staytether.com">
+<meta name="twitter:title"       content="Tether — Never Lose Touch">
+<meta name="twitter:description" content="The people you love deserve more than good intentions. Tether reminds you to stay in touch with your circle.">
+<meta name="twitter:image"       content="https://staytether.com/og-image.png">
+
+<!-- ── FAVICON ── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232A6B3C'/><line x1='11' y1='10' x2='21' y2='10' stroke='white' stroke-width='2' stroke-opacity='0.4' stroke-linecap='round'/><line x1='11' y1='10' x2='16' y2='23' stroke='white' stroke-width='2' stroke-opacity='0.4' stroke-linecap='round'/><line x1='21' y1='10' x2='16' y2='23' stroke='white' stroke-width='2' stroke-opacity='0.4' stroke-linecap='round'/><circle cx='11' cy='10' r='3.5' fill='white'/><circle cx='21' cy='10' r='3.5' fill='white'/><circle cx='16' cy='23' r='3.5' fill='white'/></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232A6B3C'/><circle cx='11' cy='10' r='3.5' fill='white'/><circle cx='21' cy='10' r='3.5' fill='white'/><circle cx='16' cy='23' r='3.5' fill='white'/></svg>">
+
+<!-- ── FONTS ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── FONT DISPLAY ── */
+@font-face {
+  font-display: swap;
+}
+
+/* ── HAMBURGER MENU ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 200;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--dark);
+  transition: all 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transition: background 0.3s;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  color: var(--dark);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-menu a:hover { color: var(--green); }
+
+.mobile-menu .mobile-cta {
+  margin-top: 8px;
+}
+
+.mobile-menu-footer {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-theme-toggle {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.mobile-theme-toggle:hover { background: var(--green-l); color: var(--green); }
+
+/* ── LIGHT MODE TOKENS ── */
+:root {
+  --bg:      #FAF7F2;
+  --cream:   #F3EDE3;
+  --dark:    #1A1814;
+  --green:   #2A6B3C;
+  --green-l: #EBF4EE;
+  --green-d: #1E4F2C;
+  --rose:    #C4614A;
+  --rose-l:  #FBF0ED;
+  --amber:   #B07D3A;
+  --amber-l: #FDF5E8;
+  --border:  #DDD7CE;
+  --muted:   #8C8479;
+  --text:    #2C2820;
+  --surface: white;
+  --preview-bg: white;
+}
+
+/* ── DARK MODE TOKENS ── */
+[data-theme="dark"] {
+  --bg:      #141210;
+  --cream:   #1E1B17;
+  --dark:    #F0EBE3;
+  --green:   #3D8F54;
+  --green-l: #1A2E1F;
+  --green-d: #2A6B3C;
+  --rose:    #D4725A;
+  --rose-l:  #2A1A16;
+  --amber:   #C48E4A;
+  --amber-l: #251D0F;
+  --border:  #2E2A25;
+  --muted:   #7A7268;
+  --text:    #E8E0D5;
+  --surface: #1E1B17;
+  --preview-bg: #252118;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Geist', sans-serif;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 52px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* ── LOGO MARK ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.logo-wordmark {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  color: var(--green);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover { background: var(--green-l); border-color: var(--green); }
+
+.icon-sun  { display: none; }
+.icon-moon { display: block; }
+[data-theme="dark"] .icon-sun  { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover { background: var(--green-d); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  padding: 10px 22px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.btn-outline:hover { background: var(--green-l); }
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 80px 52px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 20px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1.5px;
+  background: var(--rose);
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--dark);
+}
+
+.hero h1 em { font-style: italic; color: var(--green); }
+
+.hero p {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* ── APP PREVIEW ── */
+.app-preview {
+  background: var(--preview-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 64px rgba(42,107,60,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  position: relative;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.app-preview::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: -6px;
+  right: 6px; bottom: 6px;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  z-index: -1;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.preview-dots { display: flex; gap: 5px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.d-r { background: #FF6B6B; }
+.d-y { background: #FFD93D; }
+.d-g { background: #6BCB77; }
+
+.preview-title {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.preview-body { padding: 20px; }
+
+.preview-greeting {
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.preview-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+  transition: background 0.15s, border-color 0.3s;
+}
+
+.contact-row:hover { background: var(--bg); }
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+  font-family: 'Geist', sans-serif;
+}
+
+.av-1 { background: var(--green-l); color: var(--green); }
+.av-2 { background: var(--rose-l);  color: var(--rose); }
+.av-3 { background: var(--amber-l); color: var(--amber); }
+
+.contact-info { flex: 1; }
+
+.contact-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.contact-meta {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.h-green  { background: #4CAF50; }
+.h-amber  { background: #FF9800; }
+.h-red    { background: #F44336; }
+
+.preview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.p-stat {
+  text-align: center;
+  padding: 10px 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.p-stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  color: var(--green);
+}
+
+.p-stat-label {
+  font-size: 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+  font-family: 'Geist Mono', monospace;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 80px 52px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+/* ── HOW IT WORKS ── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.step {
+  background: var(--surface);
+  padding: 32px 28px;
+  transition: background 0.2s;
+}
+
+.step:hover { background: var(--green-l); }
+
+.step-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 48px;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.step h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.step p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── FEATURES ── */
+.features-section {
+  background: var(--green);
+  padding: 80px 52px;
+}
+
+.features-inner { max-width: 1200px; margin: 0 auto; }
+.features-section .section-eyebrow { color: rgba(255,255,255,0.5); }
+.features-section .section-title   { color: white; }
+.features-section .section-sub     { color: rgba(255,255,255,0.55); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+.feat {
+  background: rgba(255,255,255,0.04);
+  padding: 28px;
+  transition: background 0.2s;
+}
+
+.feat:hover { background: rgba(255,255,255,0.08); }
+
+.feat-icon { font-size: 26px; margin-bottom: 14px; }
+
+.feat h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.feat p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+}
+
+/* ── QUOTE ── */
+.quote-section {
+  padding: 72px 52px;
+  text-align: center;
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.quote-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-style: italic;
+  color: var(--dark);
+  max-width: 680px;
+  margin: 0 auto 16px;
+  line-height: 1.5;
+}
+
+.quote-attr {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── PRICING ── */
+.pricing-section {
+  background: var(--cream);
+  padding: 80px 52px;
+  transition: background 0.3s;
+}
+
+.pricing-inner { max-width: 840px; margin: 0 auto; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.price-card {
+  background: var(--surface);
+  padding: 36px 32px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.price-card.featured { border: 2px solid var(--green); }
+
+.price-badge {
+  position: absolute;
+  top: -12px;
+  left: 28px;
+  background: var(--rose);
+  color: white;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 100px;
+}
+
+.price-tier {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-family: 'Geist Mono', monospace;
+}
+
+.price-amount {
+  font-family: 'Instrument Serif', serif;
+  font-size: 48px;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.price-amount span {
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.price-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+.price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.price-features li {
+  font-size: 13px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.price-features li::before { content: '✓'; color: var(--green); font-weight: 600; flex-shrink: 0; }
+.price-features li.off     { color: var(--muted); }
+.price-features li.off::before { content: '—'; color: var(--border); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.4);
+  padding: 40px 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  transition: background 0.3s;
+}
+
+[data-theme="dark"] footer {
+  background: #0D0B09;
+  border-top: 1px solid var(--border);
+}
+
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  color: white;
+}
+
+.footer-links { display: flex; gap: 20px; }
+
+.footer-links a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: white; }
+
+/* ── EARLY ACCESS SECTION ── */
+.early-access {
+  background: var(--green);
+  padding: 100px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ea-icon {
+  width: 72px;
+  height: 72px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 20px;
+}
+
+.ea-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+
+.ea-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  color: white;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.ea-title em {
+  font-style: italic;
+  color: rgba(255,255,255,0.65);
+}
+
+.ea-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.ea-form {
+  display: flex;
+  gap: 0;
+  max-width: 640px;
+  margin: 0 auto;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.ea-form:focus-within { border-color: rgba(255,255,255,0.6); }
+
+.ea-name-input,
+.ea-email-input {
+  flex: 1;
+  padding: 16px 18px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.ea-name-input { border-right: 1px solid rgba(255,255,255,0.15); }
+.ea-name-input::placeholder,
+.ea-email-input::placeholder { color: rgba(255,255,255,0.4); }
+
+.ea-submit {
+  background: white;
+  color: var(--green);
+  border: none;
+  padding: 16px 20px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 150px;
+  border-radius: 0 8px 8px 0;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.ea-submit:hover { background: var(--green-l); transform: translateX(1px); }
+
+.ea-trust {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 14px;
+  letter-spacing: 0.02em;
+}
+
+.ea-success {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  font-size: 15px;
+  color: white;
+  font-weight: 500;
+}
+
+.ea-success.visible { display: flex; }
+
+/* ── WAITLIST FORM ── */
+.waitlist-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.waitlist-input {
+  flex: 1;
+  min-width: 220px;
+  padding: 13px 18px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, background 0.3s, color 0.3s;
+}
+
+.waitlist-input::placeholder { color: var(--muted); }
+.waitlist-input:focus { border-color: var(--green); }
+
+.waitlist-success {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  background: var(--green-l);
+  border: 1.5px solid var(--green);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.waitlist-success.visible { display: flex; }
+
+.hero-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.price-waitlist { margin-top: 8px; }
+.price-waitlist .waitlist-input { width: 100%; margin-bottom: 8px; }
+.price-waitlist .btn-primary,
+.price-waitlist .btn-outline { width: 100%; padding: 13px; }
+
+/* ── MODALS ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 40px;
+  position: relative;
+  animation: fadeUp 0.25s ease both;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--muted);
+  line-height: 1;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.modal-close:hover { color: var(--dark); }
+
+.modal h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.modal-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+}
+
+.modal h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--dark);
+  margin: 20px 0 6px;
+}
+
+.modal p, .modal li {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.modal ul {
+  padding-left: 18px;
+  margin-top: 6px;
+}
+
+.modal ul li { margin-bottom: 4px; }
+
+/* Contact form inside modal */
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.contact-field label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-field input,
+.contact-field textarea {
+  padding: 12px 16px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus { border-color: var(--green); }
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder { color: var(--muted); }
+
+.contact-success {
+  display: none;
+  padding: 14px 18px;
+  background: var(--green-l);
+  border: 1.5px solid var(--green);
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.contact-success.visible { display: block; }
+
+/* ── SCROLL OFFSET FOR STICKY NAV ── */
+#how,
+#features,
+#pricing {
+  scroll-margin-top: 72px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero > * { animation: fadeUp 0.55s ease both; }
+.hero > *:nth-child(1) { animation-delay: 0.1s; }
+.hero > *:nth-child(2) { animation-delay: 0.25s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero { grid-template-columns: 1fr; padding: 48px 20px; gap: 40px; }
+  .steps { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .section { padding: 60px 20px; }
+  .features-section { padding: 60px 20px; }
+  .pricing-section { padding: 60px 20px; }
+  .early-access { padding: 72px 20px; }
+  .ea-form { flex-direction: column; border: none; background: none; gap: 8px; }
+  .ea-name-input,
+  .ea-email-input {
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    width: 100%;
+  }
+  .ea-name-input { border-right: 1.5px solid rgba(255,255,255,0.25); }
+  .ea-submit { width: 100%; padding: 16px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="7" fill="#2A6B3C"/>
+      <line x1="11" y1="10" x2="21" y2="10" stroke="white" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+      <line x1="11" y1="10" x2="16" y2="23" stroke="white" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+      <line x1="21" y1="10" x2="16" y2="23" stroke="white" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+      <circle cx="11" cy="10" r="3.5" fill="white"/>
+      <circle cx="21" cy="10" r="3.5" fill="white"/>
+      <circle cx="16" cy="23" r="3.5" fill="white"/>
+    </svg>
+    <span class="logo-wordmark">Tether</span>
+  </a>
+  <div class="nav-links">
+    <a href="#" onclick="scrollToSection('how'); return false;">How it works</a>
+    <a href="#" onclick="scrollToSection('features'); return false;">Features</a>
+    <a href="#" onclick="scrollToSection('pricing'); return false;">Pricing</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <span class="icon-moon">🌙</span>
+      <span class="icon-sun">☀️</span>
+    </button>
+    <button class="btn-primary" onclick="scrollToWaitlist()">Join the waitlist</button>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="closeMobileMenu(); scrollToSection('how'); return false;">How it works</a>
+  <a href="#" onclick="closeMobileMenu(); scrollToSection('features'); return false;">Features</a>
+  <a href="#" onclick="closeMobileMenu(); scrollToSection('pricing'); return false;">Pricing</a>
+  <button class="btn-primary mobile-cta" onclick="closeMobileMenu(); scrollToWaitlist();">Join the waitlist</button>
+  <div class="mobile-menu-footer">
+    <button class="mobile-theme-toggle" onclick="toggleTheme()">
+      <span class="icon-moon">🌙 Dark mode</span>
+      <span class="icon-sun">☀️ Light mode</span>
+    </button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Relationship Reminders</div>
+    <h1>The people you love<br>deserve more than<br><em>good intentions.</em></h1>
+    <p>Tether gently reminds you to reach out to the people who matter — before weeks turn into months without a word. Add your circle, set a cadence, let the app do the remembering.</p>
+    <div id="hero-waitlist">
+      <div class="waitlist-form">
+        <input
+          class="waitlist-input"
+          type="email"
+          id="hero-email"
+          placeholder="Enter your email address"
+          autocomplete="email"
+        />
+        <button class="btn-primary" style="padding:13px 28px;font-size:15px;" onclick="submitWaitlist('hero')">
+          Join the waitlist
+        </button>
+      </div>
+      <div class="waitlist-success" id="hero-success">
+        ✓ You're on the list — we'll reach out when Tether is ready.
+      </div>
+      <div class="hero-note" id="hero-count">Be among the first to try Tether · No credit card required</div>
+    </div>
+  </div>
+
+  <div class="app-preview">
+    <div class="preview-bar">
+      <div class="preview-dots">
+        <div class="dot d-r"></div>
+        <div class="dot d-y"></div>
+        <div class="dot d-g"></div>
+      </div>
+      <div class="preview-title">Tether — Your Circle</div>
+    </div>
+    <div class="preview-body">
+      <div class="preview-greeting">Good morning, Alex 👋</div>
+      <div class="preview-sub">3 people to reach out to today</div>
+
+      <div class="contact-row">
+        <div class="avatar av-1">M</div>
+        <div class="contact-info">
+          <div class="contact-name">Mom</div>
+          <div class="contact-meta">Last talked · 12 days ago · Weekly cadence</div>
+        </div>
+        <div class="health-dot h-red"></div>
+      </div>
+
+      <div class="contact-row">
+        <div class="avatar av-2">J</div>
+        <div class="contact-info">
+          <div class="contact-name">Jordan</div>
+          <div class="contact-meta">Last talked · 3 weeks ago · Monthly cadence</div>
+        </div>
+        <div class="health-dot h-amber"></div>
+      </div>
+
+      <div class="contact-row">
+        <div class="avatar av-3">D</div>
+        <div class="contact-info">
+          <div class="contact-name">Dr. Williams</div>
+          <div class="contact-meta">Last talked · 2 months ago · Quarterly cadence</div>
+        </div>
+        <div class="health-dot h-amber"></div>
+      </div>
+
+      <div class="preview-stats">
+        <div class="p-stat">
+          <div class="p-stat-num">24</div>
+          <div class="p-stat-label">In Circle</div>
+        </div>
+        <div class="p-stat">
+          <div class="p-stat-num">18</div>
+          <div class="p-stat-label">On Track</div>
+        </div>
+        <div class="p-stat">
+          <div class="p-stat-num">41d</div>
+          <div class="p-stat-label">Streak</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<div class="section" id="how">
+  <div class="section-eyebrow">How it works</div>
+  <div class="section-title">Simple enough to<br>actually stick to</div>
+  <div class="section-sub">Three steps. No complicated setup. Just you and the people you care about.</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Build your circle</h3>
+      <p>Add the people who matter — family, close friends, mentors. Set how often you want to be in touch with each one.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Get gentle reminders</h3>
+      <p>Tether checks in daily and lets you know who's due for a call, text, or coffee. No guilt — just a nudge.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Log and move on</h3>
+      <p>Reach out, log the interaction in two taps, and let Tether reset the clock. The app does the tracking so your brain doesn't have to.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-section" id="features">
+  <div class="features-inner">
+    <div class="section-eyebrow">Features</div>
+    <div class="section-title">Designed around<br>real relationships</div>
+    <div class="section-sub" style="margin-bottom:40px;">Not a CRM. Not a task manager. Just a thoughtful companion for staying connected.</div>
+
+    <div class="features-grid">
+      <div class="feat">
+        <div class="feat-icon">💚</div>
+        <h3>Relationship health view</h3>
+        <p>Color-coded indicators show at a glance who's thriving in your circle and who's slipping — before it's been too long.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">✨</div>
+        <h3>AI conversation starters</h3>
+        <p>Not sure what to say after a while? Tether generates warm, personal openers based on what you know about the person.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📅</div>
+        <h3>Custom cadences</h3>
+        <p>Weekly for your parents. Monthly for close friends. Quarterly for mentors. Set the right rhythm for each relationship.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📬</div>
+        <h3>Daily digest emails</h3>
+        <p>A gentle morning email showing who's due today — with one-click logging so you never have to open the app if you don't want to.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🎂</div>
+        <h3>Birthday reminders</h3>
+        <p>Add birthdays and Tether reminds you a week ahead — enough time to plan something meaningful, not just a last-minute text.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📊</div>
+        <h3>Monthly relationship report</h3>
+        <p>A personal digest of who you showed up for, who you missed, and what patterns are forming in how you stay connected.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-text">"The quality of your life is the quality of your relationships."</div>
+  <div class="quote-attr">— Tony Robbins</div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-eyebrow" style="display:flex;justify-content:center;">Pricing</div>
+      <div class="section-title">Relationships are free.<br>The reminder isn't much.</div>
+      <div class="section-sub" style="margin:0 auto;text-align:center;">Start free. Upgrade when Tether becomes part of how you show up for people.</div>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Free</div>
+        <div class="price-amount">$0</div>
+        <div class="price-desc">Everything you need to start staying in touch with the people who matter most.</div>
+        <ul class="price-features">
+          <li>Up to 15 contacts</li>
+          <li>Custom cadences per person</li>
+          <li>Interaction logging</li>
+          <li>Relationship health view</li>
+          <li class="off">AI conversation starters</li>
+          <li class="off">Daily digest emails</li>
+          <li class="off">Monthly relationship report</li>
+          <li class="off">Birthday reminders</li>
+        </ul>
+        <div class="price-waitlist">
+          <input class="waitlist-input" type="email" id="free-email" placeholder="Enter your email" autocomplete="email" />
+          <button class="btn-outline" onclick="submitWaitlist('free')">Join the waitlist</button>
+          <div class="waitlist-success" id="free-success" style="margin-top:8px;">
+            ✓ You're on the list!
+          </div>
+        </div>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">Most loved</div>
+        <div class="price-tier">Paid</div>
+        <div class="price-amount">$7 <span>/ month</span></div>
+        <div class="price-desc">Unlimited circle, AI-powered starters, and the features that make Tether feel like magic.</div>
+        <ul class="price-features">
+          <li>Unlimited contacts</li>
+          <li>Custom cadences per person</li>
+          <li>Interaction logging</li>
+          <li>Relationship health view</li>
+          <li>AI conversation starters</li>
+          <li>Daily digest emails</li>
+          <li>Monthly relationship report</li>
+          <li>Birthday reminders</li>
+        </ul>
+        <div class="price-waitlist">
+          <input class="waitlist-input" type="email" id="paid-email" placeholder="Enter your email" autocomplete="email" />
+          <button class="btn-primary" onclick="submitWaitlist('paid')">Join the waitlist</button>
+          <div class="waitlist-success" id="paid-success" style="margin-top:8px;">
+            ✓ You're on the list — we'll prioritize your early access!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:18px;font-size:12px;color:var(--muted);">
+      Annual plan available at $63/year — save 2 months
+    </div>
+  </div>
+</div>
+
+<!-- EARLY ACCESS -->
+<div class="early-access" id="early-access">
+  <div class="ea-icon">🤝</div>
+  <div class="ea-eyebrow">Be First</div>
+  <div class="ea-title">Get early access<br><em>to Tether</em></div>
+  <p class="ea-sub">Built for people who care — everyday check-ins, important milestones, and the people you never want to drift from. Be the first to know when it's ready.</p>
+
+  <div class="ea-form" id="ea-form">
+    <input class="ea-name-input"  type="text"  id="ea-name"  placeholder="Your first name" autocomplete="given-name" />
+    <input class="ea-email-input" type="email" id="ea-email" placeholder="Email address"   autocomplete="email" />
+    <button class="ea-submit" onclick="submitEarlyAccess()">Join the waitlist</button>
+  </div>
+
+  <div class="ea-success" id="ea-success">
+    ✓ You're on the list — we'll reach out when Tether is ready.
+  </div>
+
+  <div class="ea-trust">No spam, ever. Unsubscribe anytime.</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="7" fill="#3D8F54"/>
+      <line x1="11" y1="10" x2="21" y2="10" stroke="white" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+      <line x1="11" y1="10" x2="16" y2="23" stroke="white" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+      <line x1="21" y1="10" x2="16" y2="23" stroke="white" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+      <circle cx="11" cy="10" r="3.5" fill="white"/>
+      <circle cx="21" cy="10" r="3.5" fill="white"/>
+      <circle cx="16" cy="23" r="3.5" fill="white"/>
+    </svg>
+    <div class="footer-logo">Tether</div>
+  </div>
+  <div>© 2026 Tether. Built for people who care.</div>
+  <div class="footer-links">
+    <a href="#" onclick="openModal('modal-privacy'); return false;">Privacy</a>
+    <a href="#" onclick="openModal('modal-terms'); return false;">Terms</a>
+    <a href="#" onclick="openModal('modal-contact'); return false;">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ── THEME TOGGLE ──────────────────────────────────────────────────────────────
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('tether-theme', next);
+}
+
+(function() {
+  const saved = localStorage.getItem('tether-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+
+// ── SECTION SCROLL ────────────────────────────────────────────────────────────
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navHeight = document.querySelector('nav').offsetHeight;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// ── CONFIGURATION ─────────────────────────────────────────────────────────────
+const SUPABASE_URL  = 'https://dplgyuoyxogghyzepucv.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwbGd5dW95eG9nZ2h5emVwdWN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1OTQ5MzksImV4cCI6MjA5NjE3MDkzOX0.-ZwNoX2SLX4kbQhh7WlgpU172rzb86skNJQtP49TBHA';
+
+// Supabase waitlist table columns:
+//   email       text         (unique)
+//   name        text         (nullable)
+//   source      text         ('hero', 'free', 'paid', 'early-access')
+//   created_at  timestamptz  (default: now())
+const TABLE = 'waitlist';
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function scrollToWaitlist() {
+  document.getElementById('early-access').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => document.getElementById('ea-name').focus(), 600);
+}
+
+async function submitEarlyAccess() {
+  const nameEl    = document.getElementById('ea-name');
+  const emailEl   = document.getElementById('ea-email');
+  const formEl    = document.getElementById('ea-form');
+  const successEl = document.getElementById('ea-success');
+  const name      = nameEl.value.trim();
+  const email     = emailEl.value.trim();
+
+  if (!isValidEmail(email)) {
+    emailEl.style.borderColor = 'rgba(196,97,74,0.8)';
+    emailEl.placeholder = 'Please enter a valid email';
+    setTimeout(() => {
+      emailEl.style.borderColor = '';
+      emailEl.placeholder = 'Email address';
+    }, 2000);
+    return;
+  }
+
+  emailEl.disabled = true;
+  nameEl.disabled  = true;
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Prefer':        'return=minimal',
+      },
+      body: JSON.stringify({ email, name: name || null, source: 'early-access' }),
+    });
+
+    if (res.ok || res.status === 409) {
+      formEl.style.display = 'none';
+      successEl.classList.add('visible');
+    } else {
+      throw new Error(`Status ${res.status}`);
+    }
+  } catch (err) {
+    console.error('Early access error:', err);
+    formEl.style.display = 'none';
+    successEl.classList.add('visible');
+  }
+}
+
+async function submitWaitlist(source) {
+  const inputEl   = document.getElementById(`${source}-email`);
+  const successEl = document.getElementById(`${source}-success`);
+  const email     = inputEl.value.trim();
+
+  if (!isValidEmail(email)) {
+    inputEl.style.borderColor = 'var(--rose)';
+    inputEl.placeholder = 'Please enter a valid email';
+    setTimeout(() => {
+      inputEl.style.borderColor = '';
+      inputEl.placeholder = source === 'hero' ? 'Enter your email address' : 'Enter your email';
+    }, 2000);
+    return;
+  }
+
+  // Disable input and show loading state on button
+  inputEl.disabled = true;
+  const btn = inputEl.parentElement
+    ? inputEl.parentElement.querySelector('button')
+    : null;
+  if (btn) { btn.textContent = 'Joining...'; btn.disabled = true; }
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Prefer':        'return=minimal',
+      },
+      body: JSON.stringify({ email, source }),
+    });
+
+    if (res.ok || res.status === 409) {
+      inputEl.style.display = 'none';
+      if (btn) btn.style.display = 'none';
+      successEl.classList.add('visible');
+      if (source === 'hero') {
+        const countEl = document.getElementById('hero-count');
+        if (countEl) countEl.style.display = 'none';
+      }
+    } else {
+      throw new Error(`Status ${res.status}`);
+    }
+  } catch (err) {
+    console.error('Waitlist error:', err);
+    inputEl.style.display = 'none';
+    if (btn) btn.style.display = 'none';
+    successEl.classList.add('visible');
+  }
+}
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────────────
+function toggleMobileMenu() {
+  const menu       = document.getElementById('mobile-menu');
+  const hamburger  = document.getElementById('hamburger');
+  const isOpen     = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── MODALS ────────────────────────────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(event, id) {
+  if (event.target.id === id) closeModal(id);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    ['modal-privacy','modal-terms','modal-contact'].forEach(id => closeModal(id));
+  }
+});
+
+
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  const id = e.target.id;
+  if (id === 'hero-email')  submitWaitlist('hero');
+  if (id === 'free-email')  submitWaitlist('free');
+  if (id === 'paid-email')  submitWaitlist('paid');
+  if (id === 'ea-name' || id === 'ea-email') submitEarlyAccess();
+});
+</script>
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="modal-privacy" onclick="closeModalOutside(event, 'modal-privacy')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-privacy')">✕</button>
+    <h2>Privacy <em style="font-style:italic;color:var(--green);">Policy</em></h2>
+    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: June 4, 2026</div>
+
+    <h3>1. Introduction</h3>
+    <p>Tether ("we", "our", or "us") is a web application that helps you maintain meaningful relationships by reminding you to stay in touch with the people who matter. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your data.</p>
+    <p style="margin-top:8px;">By using Tether, you agree to the collection and use of information as described in this policy. If you do not agree, please discontinue use of the app.</p>
+
+    <h3>2. Information We Collect</h3>
+    <p><strong style="color:var(--dark);">Account Information</strong></p>
+    <p>When you create an account or join the waitlist, we collect:</p>
+    <ul>
+      <li><strong style="color:var(--dark);">Email address</strong> — used to identify your account and send account-related communications</li>
+      <li><strong style="color:var(--dark);">Display name</strong> — the name shown on your profile within the app</li>
+      <li><strong style="color:var(--dark);">First name</strong> — if provided on the early access form</li>
+    </ul>
+
+    <p style="margin-top:12px;"><strong style="color:var(--dark);">Relationship Data</strong></p>
+    <p>Information you add about the people in your circle:</p>
+    <ul>
+      <li>Contact names, relationship types, and cadence preferences</li>
+      <li>Interaction logs (type, date, and optional notes)</li>
+      <li>Birthdays and personal notes you choose to add</li>
+    </ul>
+    <p style="margin-top:8px;">This data is stored solely to power your reminders and relationship health view. It is never analyzed for advertising purposes.</p>
+
+    <p style="margin-top:12px;"><strong style="color:var(--dark);">Usage Data</strong></p>
+    <p>We collect basic usage data to understand how the app is being used and to enforce free-tier limits. This data is associated with your account.</p>
+
+    <h3>3. How We Use Your Information</h3>
+    <ul>
+      <li>To provide and operate the Tether service</li>
+      <li>To send daily digest emails and reminders you have opted into</li>
+      <li>To generate AI-powered conversation starters based on your contact notes</li>
+      <li>To communicate with you about your account when necessary</li>
+      <li>To improve the product based on aggregate, anonymised usage patterns</li>
+    </ul>
+
+    <h3>4. Third-Party Services</h3>
+    <p><strong style="color:var(--dark);">Supabase</strong><br>We use Supabase for authentication and database storage. Your account data and relationship data are stored on Supabase infrastructure. Supabase is SOC 2 compliant.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Anthropic (Claude API)</strong><br>When you request AI conversation starters, relevant contact notes are sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Stripe</strong><br>Payment processing is handled by Stripe. Tether never stores your credit card information directly. Stripe's privacy policy governs payment data.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Resend</strong><br>We use Resend to deliver daily digest emails and transactional notifications. Your email address is shared with Resend solely for this purpose.</p>
+
+    <h3>5. No Sale of Data</h3>
+    <p>We do <strong style="color:var(--dark);">not</strong> sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Ever.</p>
+
+    <h3>6. Data Storage and Retention</h3>
+    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted from our database within 30 days.</p>
+    <p style="margin-top:8px;">To request account deletion, email us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> with the subject line "Delete My Account".</p>
+
+    <h3>7. Your Rights</h3>
+    <p>You have the right to:</p>
+    <ul>
+      <li><strong style="color:var(--dark);">Access</strong> — request a copy of the personal data we hold about you</li>
+      <li><strong style="color:var(--dark);">Correction</strong> — update your information directly in the app settings</li>
+      <li><strong style="color:var(--dark);">Deletion</strong> — request permanent deletion of your account and all associated data</li>
+      <li><strong style="color:var(--dark);">Portability</strong> — request an export of your relationship data</li>
+    </ul>
+    <p style="margin-top:8px;">To exercise any of these rights, contact us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a>.</p>
+
+    <h3>8. Children's Privacy</h3>
+    <p>Tether is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+
+    <h3>9. Security</h3>
+    <p>We implement industry-standard security measures including encrypted data transmission (HTTPS/TLS), secure authentication via Supabase Auth, and row-level security on our database so users can only access their own data. No method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+    <h3>10. Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page. For significant changes, we will notify you by email before they take effect.</p>
+
+    <h3>11. Contact Us</h3>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
+    <ul>
+      <li><strong style="color:var(--dark);">Email:</strong> <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></li>
+      <li><strong style="color:var(--dark);">App:</strong> Tether — Keep in Touch</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal-overlay" id="modal-terms" onclick="closeModalOutside(event, 'modal-terms')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-terms')">✕</button>
+    <h2>Terms of <em style="font-style:italic;color:var(--green);">Service</em></h2>
+    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: June 4, 2026</div>
+
+    <h3>1. Introduction</h3>
+    <p>These Terms of Service govern your use of Tether ("we", "our", "us"). By using Tether, you agree to these terms. Please read them — they are written in plain English.</p>
+
+    <h3>2. Using Tether</h3>
+    <ul>
+      <li>Tether is a personal relationship reminder tool intended for keeping in touch with real people you know.</li>
+      <li>You must be at least 13 years old to use Tether.</li>
+      <li>You are responsible for maintaining the security of your account and password.</li>
+      <li>You are responsible for the accuracy of the information you add about your contacts.</li>
+      <li>Do not use Tether for spam, harassment, or any activity that would harm others.</li>
+      <li>Do not attempt to reverse-engineer, scrape, or otherwise misuse the platform.</li>
+    </ul>
+
+    <h3>3. Your Data</h3>
+    <ul>
+      <li>You own your data. Tether does not claim any rights to your contact information, relationship notes, or interaction logs.</li>
+      <li>You can export or delete your data at any time by contacting us.</li>
+      <li>We will never sell your data or use it to serve you advertisements.</li>
+    </ul>
+
+    <h3>4. Free and Paid Tiers</h3>
+    <p>Tether offers a free tier with limited features and a paid subscription with full access. The free tier allows up to 15 contacts with basic features. The paid tier unlocks unlimited contacts, AI conversation starters, daily digest emails, birthday reminders, and monthly relationship reports.</p>
+
+    <h3>5. Payments and Cancellation</h3>
+    <ul>
+      <li>Paid subscriptions are billed monthly or annually via Stripe.</li>
+      <li>You can cancel your subscription at any time from your account settings.</li>
+      <li>Upon cancellation you retain access until the end of your current billing period.</li>
+      <li>We do not offer refunds for partial billing periods.</li>
+      <li>Prices may change with 30 days advance notice by email.</li>
+    </ul>
+
+    <h3>6. Service Availability</h3>
+    <p>Tether is provided as-is. We will do our best to keep the service running reliably, but we cannot guarantee 100% uptime. We are not liable for any loss of data, missed reminders, or damages arising from use of the service.</p>
+
+    <h3>7. Intellectual Property</h3>
+    <p>All content, design, and code within Tether is owned by Tether and protected by applicable intellectual property laws. You may not copy, reproduce, or distribute any part of the product without written permission.</p>
+
+    <h3>8. Termination</h3>
+    <p>We reserve the right to suspend or terminate accounts that violate these terms. If your account is terminated for a violation, you will not be entitled to a refund.</p>
+
+    <h3>9. Changes to These Terms</h3>
+    <p>If we make significant changes to these terms, we will notify you by email before they take effect. Continued use of Tether after changes constitutes acceptance of the updated terms.</p>
+
+    <h3>10. Contact Us</h3>
+    <p>Questions about these terms? Email us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></p>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="modal-contact" onclick="closeModalOutside(event, 'modal-contact')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-contact')">✕</button>
+    <h2>Get in <em style="font-style:italic;color:var(--green);">touch</em></h2>
+    <div class="modal-date">We'll get back to you within 48 hours.</div>
+
+    <div id="contact-form">
+      <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:24px;">Have a question or just want to say hello? Drop us a line and we'll get back to you within 48 hours.</p>
+      <a href="mailto:hello@staytether.app?subject=Hello%20from%20Tether" class="btn-primary" style="display:block;width:100%;padding:14px;text-align:center;text-decoration:none;">Email us at hello@staytether.app</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
