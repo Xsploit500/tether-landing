@@ -95,21 +95,6 @@
   margin-top: 8px;
 }
 
-.mobile-menu-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 28px;
-  color: var(--dark);
-  line-height: 1;
-  padding: 6px;
-  transition: color 0.2s;
-}
-.mobile-menu-close:hover { color: var(--green); }
-
 .mobile-menu-footer {
   position: absolute;
   bottom: 40px;
@@ -232,6 +217,27 @@ nav {
 }
 
 .nav-links a:hover { color: var(--green); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: var(--dark);
+  line-height: 1;
+  padding: 6px;
+  transition: color 0.2s;
+}
+.mobile-menu-close:hover { color: var(--green); }
 
 /* ── THEME TOGGLE ── */
 .theme-toggle {
@@ -1091,6 +1097,7 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
   .nav-links { display: none; }
+  .nav-cta { display: none; }
   .hamburger { display: flex; }
   .hero { grid-template-columns: 1fr; padding: 48px 20px; gap: 40px; }
   .steps { grid-template-columns: 1fr; }
@@ -1134,17 +1141,19 @@ footer {
     <a href="#" onclick="scrollToSection('how'); return false;">How it works</a>
     <a href="#" onclick="scrollToSection('features'); return false;">Features</a>
     <a href="#" onclick="scrollToSection('pricing'); return false;">Pricing</a>
+  </div>
+  <div class="nav-right">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
       <span class="icon-moon">🌙</span>
       <span class="icon-sun">☀️</span>
     </button>
-    <button class="btn-primary" onclick="scrollToWaitlist()">Join the waitlist</button>
+    <button class="btn-primary nav-cta" onclick="scrollToWaitlist()">Join the waitlist</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
 </nav>
 
 <!-- MOBILE MENU -->
@@ -1154,12 +1163,6 @@ footer {
   <a href="#" onclick="closeMobileMenu(); scrollToSection('features'); return false;">Features</a>
   <a href="#" onclick="closeMobileMenu(); scrollToSection('pricing'); return false;">Pricing</a>
   <button class="btn-primary mobile-cta" onclick="closeMobileMenu(); scrollToWaitlist();">Join the waitlist</button>
-  <div class="mobile-menu-footer">
-    <button class="mobile-theme-toggle" onclick="toggleTheme()">
-      <span class="icon-moon">🌙 Dark mode</span>
-      <span class="icon-sun">☀️ Light mode</span>
-    </button>
-  </div>
 </div>
 
 <!-- HERO -->
