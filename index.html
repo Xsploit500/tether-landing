@@ -95,6 +95,21 @@
   margin-top: 8px;
 }
 
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: var(--dark);
+  line-height: 1;
+  padding: 6px;
+  transition: color 0.2s;
+}
+.mobile-menu-close:hover { color: var(--green); }
+
 .mobile-menu-footer {
   position: absolute;
   bottom: 40px;
@@ -1134,6 +1149,7 @@ footer {
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
   <a href="#" onclick="closeMobileMenu(); scrollToSection('how'); return false;">How it works</a>
   <a href="#" onclick="closeMobileMenu(); scrollToSection('features'); return false;">Features</a>
   <a href="#" onclick="closeMobileMenu(); scrollToSection('pricing'); return false;">Pricing</a>
@@ -1287,8 +1303,8 @@ footer {
       </div>
       <div class="feat">
         <div class="feat-icon">🎂</div>
-        <h3>Birthday reminders</h3>
-        <p>Add birthdays and Tether reminds you a week ahead — enough time to plan something meaningful, not just a last-minute text.</p>
+        <h3>Birthday &amp; custom reminders</h3>
+        <p>Add birthdays, anniversaries, or any date that matters — and Tether reminds you ahead of time so you never miss a moment worth acknowledging.</p>
       </div>
       <div class="feat">
         <div class="feat-icon">📊</div>
@@ -1327,7 +1343,7 @@ footer {
           <li class="off">AI conversation starters</li>
           <li class="off">Daily digest emails</li>
           <li class="off">Monthly relationship report</li>
-          <li class="off">Birthday reminders</li>
+          <li class="off">Birthday &amp; custom reminders</li>
         </ul>
         <div class="price-waitlist">
           <input class="waitlist-input" type="email" id="free-email" placeholder="Enter your email" autocomplete="email" />
@@ -1351,7 +1367,7 @@ footer {
           <li>AI conversation starters</li>
           <li>Daily digest emails</li>
           <li>Monthly relationship report</li>
-          <li>Birthday reminders</li>
+          <li>Birthday &amp; custom reminders</li>
         </ul>
         <div class="price-waitlist">
           <input class="waitlist-input" type="email" id="paid-email" placeholder="Enter your email" autocomplete="email" />
