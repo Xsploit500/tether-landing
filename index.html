@@ -730,7 +730,7 @@ nav {
 
 .price-features li::before { content: '✓'; color: var(--green); font-weight: 600; flex-shrink: 0; }
 .price-features li.off     { color: var(--muted); }
-.price-features li.off::before { content: '—'; color: var(--border); }
+.price-features li.off::before { content: '-'; color: var(--border); }
 
 /* ── FOOTER ── */
 footer {
@@ -1430,9 +1430,9 @@ footer {
         </button>
       </div>
       <div class="waitlist-success" id="hero-success">
-        ✓ You're on the list. We'll reach out when Tether is ready.
+        ✓ You're on the list. We'll reach out when Tether is ready for you.
       </div>
-      <div class="hero-note" id="hero-count">Be among the first to try Tether · No credit card required</div>
+      <div class="hero-note" id="hero-count">Free to use · No credit card required</div>
     </div>
   </div>
 
@@ -1531,7 +1531,7 @@ footer {
           <div class="contact-row">
             <div class="avatar av-3" style="background:var(--amber-l);color:var(--amber);">R</div>
             <div class="contact-info">
-              <div class="contact-name">Work Anniversary — Rob</div>
+              <div class="contact-name">Work Anniversary: Rob</div>
               <div class="contact-meta">In 8 days · Mentor · 5 years together</div>
             </div>
             <div class="event-badge" style="background:var(--amber-l);color:var(--amber);font-size:9px;padding:3px 8px;border-radius:100px;white-space:nowrap;">8 days</div>
@@ -1602,9 +1602,9 @@ footer {
 
 <!-- HOW IT WORKS -->
 <div class="section" id="how">
-  <div class="section-eyebrow">How it works</div>
-  <div class="section-title">Simple enough to<br>actually stick to</div>
-  <div class="section-sub">Three steps. No complicated setup. Just you and the people you care about.</div>
+  <div class="section-eyebrow" style="margin-bottom:20px;">How it works</div>
+  <div class="section-title" style="margin-bottom:24px;">Simple enough to<br>actually stick to</div>
+  <div class="section-sub" style="margin-bottom:64px;">Three steps. No complicated setup. Just you and the people you care about.</div>
 
   <div class="steps">
     <div class="step reveal reveal-delay-1">
@@ -1670,7 +1670,7 @@ footer {
 <!-- QUOTE -->
 <div class="quote-section">
   <div class="quote-text">"The quality of your life is the quality of your relationships."</div>
-  <div class="quote-attr">— Tony Robbins</div>
+  <div class="quote-attr">- Tony Robbins</div>
 </div>
 
 <!-- PRICING -->
@@ -1678,39 +1678,16 @@ footer {
   <div class="pricing-inner">
     <div style="text-align:center;margin-bottom:48px;">
       <div class="section-eyebrow" style="display:flex;justify-content:center;">Pricing</div>
-      <div class="section-title">Relationships are free.<br>The reminder is not much.</div>
-      <div class="section-sub" style="margin:0 auto;text-align:center;">Start free. Upgrade when Tether becomes part of how you show up for people.</div>
+      <div class="section-title">Free for everyone,<br>from day one.</div>
+      <div class="section-sub" style="margin:0 auto;text-align:center;">Every feature is free while we build Tether. We may introduce paid plans down the road, and if we do, current users will be notified before anything changes.</div>
     </div>
 
-    <div class="pricing-grid">
-      <div class="price-card">
-        <div class="price-tier">Free</div>
-        <div class="price-amount">$0</div>
-        <div class="price-desc">Everything you need to start staying in touch with the people who matter most.</div>
-        <ul class="price-features">
-          <li>Up to 15 contacts</li>
-          <li>Custom cadences per person</li>
-          <li>Interaction logging</li>
-          <li>Relationship health view</li>
-          <li class="off">AI conversation starters</li>
-          <li class="off">Daily digest emails</li>
-          <li class="off">Monthly relationship report</li>
-          <li class="off">Birthday &amp; custom reminders</li>
-        </ul>
-        <div class="price-waitlist">
-          <input class="waitlist-input" type="email" id="free-email" placeholder="Enter your email" autocomplete="email" />
-          <button class="btn-outline" onclick="submitWaitlist('free')">Join the waitlist</button>
-          <div class="waitlist-success" id="free-success" style="margin-top:8px;">
-            ✓ You're on the list!
-          </div>
-        </div>
-      </div>
-
+    <div class="pricing-grid" style="grid-template-columns: 1fr; max-width: 420px; margin: 0 auto;">
       <div class="price-card featured">
-        <div class="price-badge">Most loved</div>
-        <div class="price-tier">Paid</div>
-        <div class="price-amount">$7 <span>/ month</span></div>
-        <div class="price-desc">Unlimited circle, AI-powered starters, and the features that make Tether feel like magic.</div>
+        <div class="price-badge">Free, for now</div>
+        <div class="price-tier">Tether</div>
+        <div class="price-amount">$0</div>
+        <div class="price-desc">Every feature, unlocked, while we build Tether with our earliest users.</div>
         <ul class="price-features">
           <li>Unlimited contacts</li>
           <li>Custom cadences per person</li>
@@ -1722,17 +1699,17 @@ footer {
           <li>Birthday &amp; custom reminders</li>
         </ul>
         <div class="price-waitlist">
-          <input class="waitlist-input" type="email" id="paid-email" placeholder="Enter your email" autocomplete="email" />
-          <button class="btn-primary" onclick="submitWaitlist('paid')">Join the waitlist</button>
-          <div class="waitlist-success" id="paid-success" style="margin-top:8px;">
-            ✓ You're on the list. We'll prioritize your early access!
+          <input class="waitlist-input" type="email" id="pricing-email" placeholder="Enter your email" autocomplete="email" />
+          <button class="btn-primary" onclick="submitWaitlist('pricing')">Join the waitlist</button>
+          <div class="waitlist-success" id="pricing-success" style="margin-top:8px;">
+            ✓ You're on the list!
           </div>
         </div>
       </div>
     </div>
 
     <div style="text-align:center;margin-top:18px;font-size:12px;color:var(--muted);">
-      Annual plan available at $70/year (save 2 months)
+      No credit card required. No trial countdown. Just Tether.
     </div>
   </div>
 </div>
@@ -1740,9 +1717,9 @@ footer {
 <!-- EARLY ACCESS -->
 <div class="early-access" id="early-access">
   <div class="ea-icon">🤝</div>
-  <div class="ea-eyebrow">Be First</div>
-  <div class="ea-title">Get early access<br><em>to Tether</em></div>
-  <p class="ea-sub">Built for people who care: everyday check-ins, important milestones, and the people you never want to drift from. Be the first to know when it is ready.</p>
+  <div class="ea-eyebrow">Coming Soon</div>
+  <div class="ea-title">Be the first<br><em>to know</em></div>
+  <p class="ea-sub">Built for people who care: everyday check-ins, important milestones, and the people you never want to drift from. Join the waitlist and we'll let you know the moment Tether is ready for you.</p>
 
   <div class="ea-form" id="ea-form">
     <input class="ea-name-input"  type="text"  id="ea-name"  placeholder="Your first name" autocomplete="given-name" />
@@ -1751,7 +1728,7 @@ footer {
   </div>
 
   <div class="ea-success" id="ea-success">
-    ✓ You're on the list. We'll reach out when Tether is ready.
+    ✓ You're on the list. We'll reach out when Tether is ready for you.
   </div>
 
   <div class="ea-trust">No spam, ever. Unsubscribe anytime.</div>
@@ -1959,9 +1936,8 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter') return;
   const id = e.target.id;
-  if (id === 'hero-email')  submitWaitlist('hero');
-  if (id === 'free-email')  submitWaitlist('free');
-  if (id === 'paid-email')  submitWaitlist('paid');
+  if (id === 'hero-email')     submitWaitlist('hero');
+  if (id === 'pricing-email')  submitWaitlist('pricing');
   if (id === 'ea-name' || id === 'ea-email') submitEarlyAccess();
 });
 
@@ -2129,80 +2105,61 @@ document.querySelectorAll('.btn-primary, .btn-outline, .ea-submit').forEach(btn 
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-privacy')">✕</button>
     <h2>Privacy <em style="font-style:italic;color:var(--green);">Policy</em></h2>
-    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: June 4, 2026</div>
+    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: July 10, 2026</div>
 
     <h3>1. Introduction</h3>
-    <p>Tether ("we", "our", or "us") is a web application that helps you maintain meaningful relationships by reminding you to stay in touch with the people who matter. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your data.</p>
-    <p style="margin-top:8px;">By using Tether, you agree to the collection and use of information as described in this policy. If you do not agree, please discontinue use of the app.</p>
+    <p>Tether is a web application that helps you maintain meaningful relationships by reminding you to stay in touch with the people who matter. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your data. By using Tether, you agree to the collection and use of information as described in this policy.</p>
 
     <h3>2. Information We Collect</h3>
-    <p><strong style="color:var(--dark);">Account Information</strong></p>
-    <p>When you create an account or join the waitlist, we collect:</p>
-    <ul>
-      <li><strong style="color:var(--dark);">Email address</strong>: used to identify your account and send account-related communications</li>
-      <li><strong style="color:var(--dark);">Display name</strong>: the name shown on your profile within the app</li>
-      <li><strong style="color:var(--dark);">First name</strong>: if provided on the early access form</li>
-    </ul>
-
-    <p style="margin-top:12px;"><strong style="color:var(--dark);">Relationship Data</strong></p>
-    <p>Information you add about the people in your circle:</p>
-    <ul>
-      <li>Contact names, relationship types, and cadence preferences</li>
-      <li>Interaction logs (type, date, and optional notes)</li>
-      <li>Birthdays and personal notes you choose to add</li>
-    </ul>
-    <p style="margin-top:8px;">This data is stored solely to power your reminders and relationship health view. It is never analyzed for advertising purposes.</p>
-
-    <p style="margin-top:12px;"><strong style="color:var(--dark);">Usage Data</strong></p>
-    <p>We collect basic usage data to understand how the app is being used and to enforce free-tier limits. This data is associated with your account.</p>
+    <p><strong style="color:var(--dark);">Account Information:</strong> email address, full name, profile photo (if you upload one), notification preferences, notification timezone, and, if you subscribe, Stripe customer and subscription identifiers. We do not store your full payment card number.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Relationship Data:</strong> contact names, photos, gender (if provided), relationship types, cadence preferences, interaction logs (type, date, optional notes), birthdays, personal notes, and custom events (such as anniversaries or other dates you add). This data is stored to power your reminders and relationship views and is never analyzed for advertising.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Technical Data:</strong> information needed to operate the service securely, such as IP address used for rate limiting. We do not currently run a separate product-analytics or advertising tracking system.</p>
 
     <h3>3. How We Use Your Information</h3>
     <ul>
-      <li>To provide and operate the Tether service</li>
-      <li>To send daily digest emails and reminders you have opted into</li>
-      <li>To generate AI-powered conversation starters based on your contact notes</li>
-      <li>To communicate with you about your account when necessary</li>
-      <li>To improve the product based on aggregate, anonymised usage patterns</li>
+      <li>To provide and operate the Tether service.</li>
+      <li>To send daily digest emails and reminders you have opted into.</li>
+      <li>To generate AI-powered conversation starters when you view a contact profile (see section 5).</li>
+      <li>To communicate with you about your account.</li>
+      <li>To process subscriptions and billing if you use a paid plan.</li>
     </ul>
 
     <h3>4. Third-Party Services</h3>
-    <p><strong style="color:var(--dark);">Supabase</strong><br>We use Supabase for authentication and database storage. Your account data and relationship data are stored on Supabase infrastructure. Supabase is SOC 2 compliant.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Anthropic (Claude API)</strong><br>When you request AI conversation starters, relevant contact notes are sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Stripe</strong><br>Payment processing is handled by Stripe. Tether never stores your credit card information directly. Stripe's privacy policy governs payment data.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Resend</strong><br>We use Resend to deliver daily digest emails and transactional notifications. Your email address is shared with Resend solely for this purpose.</p>
+    <p><strong style="color:var(--dark);">Supabase:</strong> used for authentication, database storage, and file storage (including profile and contact photos in Supabase Storage). Supabase Auth also sends transactional account emails such as email confirmation and password reset. SOC 2 compliant.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Vercel:</strong> hosts and serves the Tether web application.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Upstash:</strong> used for IP-based rate limiting of API requests.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Anthropic (Claude API):</strong> when conversation starters are generated for a contact profile, the contact's name, relationship type, contact notes, and (when available) the most recent interaction note are sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Stripe:</strong> payment processing when you subscribe. Tether never stores your credit card information directly.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Brevo:</strong> used to deliver daily digest emails and other product notification emails we send. Account emails such as password reset are sent via Supabase Auth, not Brevo.</p>
 
-    <h3>5. No Sale of Data</h3>
-    <p>We do <strong style="color:var(--dark);">not</strong> sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Ever.</p>
+    <h3>5. AI-Generated Content</h3>
+    <p>When you open a contact profile and conversation starters are available for your account, Tether may call the Anthropic Claude API automatically as part of loading that page. The call is made only if an API key is configured and the contact has either contact notes or at least one interaction note. The payload includes the contact's name, relationship type, contact notes (if any), and the most recent interaction note that contains text (if any).</p>
+    <p style="margin-top:8px;">These suggestions are AI-generated and may be inaccurate or unsuitable for your specific relationship or situation. We do not review AI-generated content before it's shown to you, and you should use your own judgment before acting on it. AI conversation starters are not professional advice.</p>
 
-    <h3>6. Data Storage and Retention</h3>
-    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted from our database within 30 days.</p>
-    <p style="margin-top:8px;">To request account deletion, email us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> with the subject line "Delete My Account".</p>
+    <h3>6. No Sale of Data</h3>
+    <p>We do not sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Ever.</p>
 
-    <h3>7. Your Rights</h3>
-    <p>You have the right to:</p>
-    <ul>
-      <li><strong style="color:var(--dark);">Access</strong>: request a copy of the personal data we hold about you</li>
-      <li><strong style="color:var(--dark);">Correction</strong>: update your information directly in the app settings</li>
-      <li><strong style="color:var(--dark);">Deletion</strong>: request permanent deletion of your account and all associated data</li>
-      <li><strong style="color:var(--dark);">Portability</strong>: request an export of your relationship data</li>
-    </ul>
-    <p style="margin-top:8px;">To exercise any of these rights, contact us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a>.</p>
+    <h3>7. Data Storage and Retention</h3>
+    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted within 30 days. To request account deletion, email <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> with subject "Delete My Account".</p>
 
-    <h3>8. Children's Privacy</h3>
-    <p>Tether is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+    <h3>8. Your Rights</h3>
+    <p><strong style="color:var(--dark);">Access:</strong> request a copy of the personal data we hold.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Correction:</strong> update your information directly in app settings.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Deletion:</strong> request permanent deletion of your account and all associated data.</p>
+    <p style="margin-top:8px;"><strong style="color:var(--dark);">Portability:</strong> request an export of your relationship data.</p>
+    <p style="margin-top:8px;">Contact <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> to exercise any of these rights.</p>
 
-    <h3>9. Security</h3>
-    <p>We implement industry-standard security measures including encrypted data transmission (HTTPS/TLS), secure authentication via Supabase Auth, and row-level security on our database so users can only access their own data. No method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+    <h3>9. Children's Privacy</h3>
+    <p>Tether is not directed to children under 13. We do not knowingly collect personal information from children under 13.</p>
 
-    <h3>10. Changes to This Policy</h3>
-    <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page. For significant changes, we will notify you by email before they take effect.</p>
+    <h3>10. Security</h3>
+    <p>Industry-standard security measures including encrypted data transmission (HTTPS/TLS), secure authentication via Supabase Auth, and row-level security on our database. No method of transmission over the internet is 100% secure.</p>
 
-    <h3>11. Contact Us</h3>
-    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
-    <ul>
-      <li><strong style="color:var(--dark);">Email:</strong> <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></li>
-      <li><strong style="color:var(--dark);">App:</strong> Tether: Keep in Touch</li>
-    </ul>
+    <h3>11. Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page.</p>
+
+    <h3>12. Contact Us</h3>
+    <p>Email: <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></p>
   </div>
 </div>
 
@@ -2211,54 +2168,47 @@ document.querySelectorAll('.btn-primary, .btn-outline, .ea-submit').forEach(btn 
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-terms')">✕</button>
     <h2>Terms of <em style="font-style:italic;color:var(--green);">Service</em></h2>
-    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: June 4, 2026</div>
+    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: July 10, 2026</div>
 
     <h3>1. Introduction</h3>
-    <p>These Terms of Service govern your use of Tether ("we", "our", "us"). By using Tether, you agree to these terms. Please read them; they are written in plain English.</p>
+    <p>These Terms of Service govern your use of Tether. By using Tether, you agree to these terms.</p>
 
     <h3>2. Using Tether</h3>
-    <ul>
-      <li>Tether is a personal relationship reminder tool intended for keeping in touch with real people you know.</li>
-      <li>You must be at least 13 years old to use Tether.</li>
-      <li>You are responsible for maintaining the security of your account and password.</li>
-      <li>You are responsible for the accuracy of the information you add about your contacts.</li>
-      <li>Do not use Tether for spam, harassment, or any activity that would harm others.</li>
-      <li>Do not attempt to reverse-engineer, scrape, or otherwise misuse the platform.</li>
-    </ul>
+    <p>Tether is a personal relationship reminder tool intended for keeping in touch with real people you know.</p>
+    <p style="margin-top:8px;">You must be at least 13 years old to use Tether.</p>
+    <p style="margin-top:8px;">You are responsible for maintaining the security of your account and password.</p>
+    <p style="margin-top:8px;">You are responsible for the accuracy of the information you add about your contacts.</p>
+    <p style="margin-top:8px;">Do not use Tether for spam, harassment, or any activity that would harm others.</p>
+    <p style="margin-top:8px;">Do not attempt to reverse-engineer, scrape, or otherwise misuse the platform.</p>
+    <p style="margin-top:8px;">You own your data.</p>
+    <p style="margin-top:8px;">Tether does not claim any rights to your contact information, relationship notes, or interaction logs.</p>
+    <p style="margin-top:8px;">We will never sell your data or use it to serve you advertisements.</p>
 
-    <h3>3. Your Data</h3>
-    <ul>
-      <li>You own your data. Tether does not claim any rights to your contact information, relationship notes, or interaction logs.</li>
-      <li>You can export or delete your data at any time by contacting us.</li>
-      <li>We will never sell your data or use it to serve you advertisements.</li>
-    </ul>
+    <h3>3. Information About Other People</h3>
+    <p>Tether lets you store notes, dates, and other information about people in your life who are not Tether users. You are responsible for the accuracy of this information and for having a reasonable basis to store it. Do not use Tether to store information about someone in a way that would violate their privacy or any law that applies to you or to them.</p>
 
-    <h3>4. Free and Paid Tiers</h3>
-    <p>Tether offers a free tier with limited features and a paid subscription with full access. The free tier allows up to 15 contacts with basic features. The paid tier unlocks unlimited contacts, AI conversation starters, daily digest emails, birthday reminders, and monthly relationship reports.</p>
+    <h3>4. Pricing</h3>
+    <p>Tether may offer both free and paid tiers. Your current tier and its features are shown in your account settings. We will notify you before any change to your existing plan's pricing.</p>
+    <p style="margin-top:8px;">If you have a paid subscription, billing is handled by Stripe. You can manage or cancel through the subscription portal in settings when available. We do not offer refunds for partial billing periods unless required by law.</p>
 
-    <h3>5. Payments and Cancellation</h3>
-    <ul>
-      <li>Paid subscriptions are billed monthly or annually via Stripe.</li>
-      <li>You can cancel your subscription at any time from your account settings.</li>
-      <li>Upon cancellation you retain access until the end of your current billing period.</li>
-      <li>We do not offer refunds for partial billing periods.</li>
-      <li>Prices may change with 30 days advance notice by email.</li>
-    </ul>
+    <h3>5. Your Data</h3>
+    <p>You may sign out of your account at any time. To request permanent deletion of your account and all associated data, contact us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> with the subject "Delete My Account." We will complete deletion within 30 days, consistent with our Privacy Policy.</p>
+    <p style="margin-top:8px;">AI-generated conversation starters are not professional advice. Tether is not liable for actions you take based on them.</p>
 
     <h3>6. Service Availability</h3>
-    <p>Tether is provided as-is. We will do our best to keep the service running reliably, but we cannot guarantee 100% uptime. We are not liable for any loss of data, missed reminders, or damages arising from use of the service.</p>
+    <p>Tether is provided as-is. We will do our best to keep the service running reliably, but we cannot guarantee 100% uptime. We are not liable for any loss of data, missed reminders, AI suggestion outcomes, or damages arising from use of the service.</p>
 
     <h3>7. Intellectual Property</h3>
     <p>All content, design, and code within Tether is owned by Tether and protected by applicable intellectual property laws. You may not copy, reproduce, or distribute any part of the product without written permission.</p>
 
     <h3>8. Termination</h3>
-    <p>We reserve the right to suspend or terminate accounts that violate these terms. If your account is terminated for a violation, you will not be entitled to a refund.</p>
+    <p>We reserve the right to suspend or terminate accounts that violate these terms.</p>
 
     <h3>9. Changes to These Terms</h3>
     <p>If we make significant changes to these terms, we will notify you by email before they take effect. Continued use of Tether after changes constitutes acceptance of the updated terms.</p>
 
     <h3>10. Contact Us</h3>
-    <p>Questions about these terms? Email us at <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></p>
+    <p>Email: <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></p>
   </div>
 </div>
 
