@@ -1040,6 +1040,20 @@ footer {
   color: var(--green-d);
 }
 
+/* Contact button — override .modal a rules so button styling shows through */
+.modal a.btn-secondary {
+  color: var(--green);
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.modal a.btn-secondary:hover {
+  color: var(--green-d);
+  background: var(--surface-hover);
+  border-color: var(--green);
+}
+
 /* Contact form inside modal */
 .contact-field {
   display: flex;
