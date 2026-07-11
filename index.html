@@ -1028,7 +1028,7 @@ footer {
 
 .modal ul li { margin-bottom: 4px; }
 
-.modal a {
+.modal a:not(.btn-primary):not(.btn-outline) {
   color: var(--green);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -1036,7 +1036,7 @@ footer {
   transition: color 0.2s;
 }
 
-.modal a:hover {
+.modal a:not(.btn-primary):not(.btn-outline):hover {
   color: var(--green-d);
 }
 
