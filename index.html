@@ -2100,69 +2100,64 @@ document.querySelectorAll('.btn-primary, .btn-outline, .ea-submit').forEach(btn 
 });
 </script>
 
-<!-- PRIVACY MODAL -->
-<div class="modal-overlay" id="modal-privacy" onclick="closeModalOutside(event, 'modal-privacy')">
+<!-- Modal: Privacy -->
+<div class="modal-overlay" id="modal-privacy" onclick="if(event.target===this) closeModal('modal-privacy')">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-privacy')">✕</button>
-    <h2>Privacy <em style="font-style:italic;color:var(--green);">Policy</em></h2>
-    <div class="modal-date">LEGAL &nbsp;·&nbsp; Effective date: July 10, 2026</div>
+    <button class="modal-close" onclick="closeModal('modal-privacy')" aria-label="Close">×</button>
+    <p class="modal-eyebrow">Legal</p>
+    <h2>Privacy Policy</h2>
+    <p><em>Effective date: July 10, 2026</em></p>
 
     <h3>1. Introduction</h3>
-    <p>Tether is a web application that helps you maintain meaningful relationships by reminding you to stay in touch with the people who matter. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your data. By using Tether, you agree to the collection and use of information as described in this policy.</p>
+    <p>Tether ("we", "our", or "us") is a web application that helps you maintain meaningful relationships by reminding you to stay in touch with the people who matter. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your data. By using Tether, you agree to the collection and use of information as described in this policy. If you do not agree, please discontinue use of Tether.</p>
 
     <h3>2. Information We Collect</h3>
-    <p><strong style="color:var(--dark);">Account Information:</strong> email address, full name, profile photo (if you upload one), notification preferences, notification timezone, and, if you subscribe, Stripe customer and subscription identifiers. We do not store your full payment card number.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Relationship Data:</strong> contact names, photos, gender (if provided), relationship types, cadence preferences, interaction logs (type, date, optional notes), birthdays, personal notes, and custom events (such as anniversaries or other dates you add). This data is stored to power your reminders and relationship views and is never analyzed for advertising.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Technical Data:</strong> information needed to operate the service securely, such as IP address used for rate limiting. We do not currently run a separate product-analytics or advertising tracking system.</p>
+    <p><strong>Account Information:</strong> email address, display name, first name.</p>
+    <p><strong>Relationship Data:</strong> contact names, relationship types, cadence preferences, interaction logs (type, date, optional notes), birthdays and personal notes. This data is stored solely to power your reminders and relationship health view and is never analyzed for advertising.</p>
+    <p><strong>Usage Data:</strong> basic usage data to understand how the app is used and enforce free-tier limits.</p>
 
     <h3>3. How We Use Your Information</h3>
     <ul>
       <li>To provide and operate the Tether service.</li>
       <li>To send daily digest emails and reminders you have opted into.</li>
-      <li>To generate AI-powered conversation starters when you view a contact profile (see section 5).</li>
+      <li>To generate AI-powered conversation starters based on your contact notes.</li>
       <li>To communicate with you about your account.</li>
-      <li>To process subscriptions and billing if you use a paid plan.</li>
+      <li>To improve the product based on aggregate, anonymised usage patterns.</li>
     </ul>
 
     <h3>4. Third-Party Services</h3>
-    <p><strong style="color:var(--dark);">Supabase:</strong> used for authentication, database storage, and file storage (including profile and contact photos in Supabase Storage). Supabase Auth also sends transactional account emails such as email confirmation and password reset. SOC 2 compliant.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Vercel:</strong> hosts and serves the Tether web application.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Upstash:</strong> used for IP-based rate limiting of API requests.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Anthropic (Claude API):</strong> when conversation starters are generated for a contact profile, the contact's name, relationship type, contact notes, and (when available) the most recent interaction note are sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Stripe:</strong> payment processing when you subscribe. Tether never stores your credit card information directly.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Brevo:</strong> used to deliver daily digest emails and other product notification emails we send. Account emails such as password reset are sent via Supabase Auth, not Brevo.</p>
+    <p><strong>Supabase:</strong> used for authentication and database storage, SOC 2 compliant.</p>
+    <p><strong>Anthropic (Claude API):</strong> when you request AI conversation starters, relevant contact notes are sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
+    <p><strong>Stripe:</strong> payment processing, Tether never stores your credit card information directly.</p>
+    <p><strong>Brevo:</strong> used to deliver daily digest emails and transactional notifications.</p>
 
-    <h3>5. AI-Generated Content</h3>
-    <p>When you open a contact profile and conversation starters are available for your account, Tether may call the Anthropic Claude API automatically as part of loading that page. The call is made only if an API key is configured and the contact has either contact notes or at least one interaction note. The payload includes the contact's name, relationship type, contact notes (if any), and the most recent interaction note that contains text (if any).</p>
-    <p style="margin-top:8px;">These suggestions are AI-generated and may be inaccurate or unsuitable for your specific relationship or situation. We do not review AI-generated content before it's shown to you, and you should use your own judgment before acting on it. AI conversation starters are not professional advice.</p>
-
-    <h3>6. No Sale of Data</h3>
+    <h3>5. No Sale of Data</h3>
     <p>We do not sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Ever.</p>
 
-    <h3>7. Data Storage and Retention</h3>
-    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted within 30 days. To request account deletion, email <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> with subject "Delete My Account".</p>
+    <h3>6. Data Storage and Retention</h3>
+    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted within 30 days. To request account deletion, email <a href="mailto:hello@staytether.app">hello@staytether.app</a> with subject "Delete My Account".</p>
 
-    <h3>8. Your Rights</h3>
-    <p><strong style="color:var(--dark);">Access:</strong> request a copy of the personal data we hold.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Correction:</strong> update your information directly in app settings.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Deletion:</strong> request permanent deletion of your account and all associated data.</p>
-    <p style="margin-top:8px;"><strong style="color:var(--dark);">Portability:</strong> request an export of your relationship data.</p>
-    <p style="margin-top:8px;">Contact <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a> to exercise any of these rights.</p>
+    <h3>7. Your Rights</h3>
+    <p><strong>Access:</strong> request a copy of the personal data we hold.</p>
+    <p><strong>Correction:</strong> update your information directly in app settings.</p>
+    <p><strong>Deletion:</strong> request permanent deletion of your account and all associated data.</p>
+    <p><strong>Portability:</strong> request an export of your relationship data.</p>
+    <p>Contact <a href="mailto:hello@staytether.app">hello@staytether.app</a> to exercise any of these rights.</p>
 
-    <h3>9. Children's Privacy</h3>
+    <h3>8. Children's Privacy</h3>
     <p>Tether is not directed to children under 13. We do not knowingly collect personal information from children under 13.</p>
 
-    <h3>10. Security</h3>
+    <h3>9. Security</h3>
     <p>Industry-standard security measures including encrypted data transmission (HTTPS/TLS), secure authentication via Supabase Auth, and row-level security on our database. No method of transmission over the internet is 100% secure.</p>
 
-    <h3>11. Changes to This Policy</h3>
-    <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page.</p>
+    <h3>10. Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page. Continued use of Tether after changes constitutes acceptance of the updated policy.</p>
 
-    <h3>12. Contact Us</h3>
-    <p>Email: <a href="mailto:hello@staytether.app" style="color:var(--green);">hello@staytether.app</a></p>
+    <h3>11. Contact Us</h3>
+    <p>Email: <a href="mailto:hello@staytether.app">hello@staytether.app</a></p>
   </div>
 </div>
-
+  
 <!-- TERMS MODAL -->
 <div class="modal-overlay" id="modal-terms" onclick="closeModalOutside(event, 'modal-terms')">
   <div class="modal">
