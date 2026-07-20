@@ -1516,7 +1516,7 @@ footer {
       <div class="preview-slide" data-title="Tether: AI Starter">
         <div class="preview-body">
           <div class="preview-greeting">Reaching out to Mom ✨</div>
-          <div class="preview-sub">AI-generated conversation opener</div>
+          <div class="preview-sub">Suggested opener from your notes</div>
           <div class="ai-starter-card">
             <div class="ai-starter-label">Suggested opener</div>
             <div class="ai-starter-text">"Hey Mom, I've been thinking about you. How did that doctor's appointment go last week? Hope everything went smoothly."</div>
@@ -1534,9 +1534,9 @@ footer {
             <div class="health-dot h-red"></div>
           </div>
           <div class="preview-stats">
-            <div class="p-stat"><div class="p-stat-num">12</div><div class="p-stat-label">Starters Used</div></div>
-            <div class="p-stat"><div class="p-stat-num">9</div><div class="p-stat-label">Sent This Mo.</div></div>
-            <div class="p-stat"><div class="p-stat-num">94%</div><div class="p-stat-label">Response Rate</div></div>
+            <div class="p-stat"><div class="p-stat-num">✓</div><div class="p-stat-label">From notes</div></div>
+            <div class="p-stat"><div class="p-stat-num">3</div><div class="p-stat-label">Suggestions</div></div>
+            <div class="p-stat"><div class="p-stat-num">1</div><div class="p-stat-label">Tap copy</div></div>
           </div>
         </div>
       </div>
@@ -1641,7 +1641,7 @@ footer {
     <div class="step reveal reveal-delay-2">
       <div class="step-num">02</div>
       <h3>Get gentle reminders</h3>
-      <p>Tether checks in daily and lets you know who is due for a call, text, or coffee. No guilt, just a nudge.</p>
+      <p>See who's due on your dashboard, and get a gentle email digest when digests are on—no guilt, just a nudge.</p>
     </div>
     <div class="step reveal reveal-delay-3">
       <div class="step-num">03</div>
@@ -1667,7 +1667,7 @@ footer {
       <div class="feat reveal reveal-delay-2">
         <div class="feat-icon">✨</div>
         <h3>AI conversation starters</h3>
-        <p>Not sure what to say after a while? Tether generates warm, personal openers based on what you know about the person.</p>
+        <p>Not sure what to say after a while? Tether generates warm, personal openers grounded in the notes and recent conversations you've saved about that person.</p>
       </div>
       <div class="feat reveal reveal-delay-3">
         <div class="feat-icon">📅</div>
@@ -1677,7 +1677,7 @@ footer {
       <div class="feat reveal reveal-delay-4">
         <div class="feat-icon">📬</div>
         <h3>Daily digest emails</h3>
-        <p>A gentle morning email showing who is due today, with one-click logging so you never have to open the app if you do not want to.</p>
+        <p>A gentle email showing who is due to hear from you, so staying close doesn't depend on memory alone.</p>
       </div>
       <div class="feat reveal reveal-delay-5">
         <div class="feat-icon">🎂</div>
@@ -1696,7 +1696,6 @@ footer {
 <!-- QUOTE -->
 <div class="quote-section">
   <div class="quote-text">"The quality of your life is the quality of your relationships."</div>
-  <div class="quote-attr">- Tony Robbins</div>
 </div>
 
 <!-- PRICING -->
@@ -2140,7 +2139,7 @@ document.querySelectorAll('.btn-primary, .btn-outline, .ea-submit').forEach(btn 
     <h3>2. Information We Collect</h3>
     <p><strong>Account Information:</strong> email address, display name, first name.</p>
     <p><strong>Relationship Data:</strong> contact names, relationship types, cadence preferences, interaction logs (type, date, optional notes), birthdays and personal notes. This data is stored solely to power your reminders and relationship health view and is never analyzed for advertising.</p>
-    <p><strong>Usage Data:</strong> basic usage data to understand how the app is used and enforce free-tier limits.</p>
+    <p><strong>Usage Data:</strong> basic technical and usage data to operate and improve the service.</p>
 
     <h3>3. How We Use Your Information</h3>
     <ul>
@@ -2153,18 +2152,18 @@ document.querySelectorAll('.btn-primary, .btn-outline, .ea-submit').forEach(btn 
 
     <h3>4. Third-Party Services</h3>
     <p><strong>Supabase:</strong> used for authentication and database storage, SOC 2 compliant.</p>
-    <p><strong>Anthropic (Claude API):</strong> when you request AI conversation starters, relevant contact notes are sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
+    <p><strong>Anthropic (Claude API):</strong> AI starters can appear when you view a contact who has notes (or a recent interaction note); relevant context is sent to the Anthropic Claude API. Per Anthropic's usage policy, data submitted via the API is not used to train their models.</p>
     <p><strong>Stripe:</strong> payment processing, Tether never stores your credit card information directly.</p>
     <p><strong>Brevo:</strong> used to deliver daily digest emails and transactional notifications.</p>
 
     <h3>5. AI-Powered Features</h3>
-    <p>Our AI conversation starters use the Anthropic Claude API. When you request a starter for a specific contact, we send relevant context (contact name, relationship type, recent interaction notes) to Anthropic's servers to generate the suggestion. Per Anthropic's terms, data sent through their API is not used to train their models. We do not store the AI-generated content; it appears in your app only when requested. Suggestions are AI-generated and may occasionally be inaccurate or feel off; use your judgment.</p>
+    <p>AI conversation starters can appear when you view a contact who has notes (or a recent interaction note). We use the Anthropic Claude API and send relevant context (contact name, relationship type, notes) to generate suggestions. Per Anthropic's terms, data sent through their API is not used to train their models. Suggestions are AI-generated and are not guarantees—they may occasionally be inaccurate or feel off; use your judgment.</p>
 
     <h3>6. No Sale of Data</h3>
     <p>We do not sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Ever.</p>
 
     <h3>7. Data Storage and Retention</h3>
-    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted within 30 days. To request account deletion, email <a href="mailto:hello@staytether.app">hello@staytether.app</a> with subject "Delete My Account".</p>
+    <p>Your account data is retained for as long as your account exists. If you delete your account, your personal data and relationship records will be permanently deleted within 30 days. You can delete your account in the app settings, or email <a href="mailto:hello@staytether.app">hello@staytether.app</a> with subject "Delete My Account".</p>
 
     <h3>8. Your Rights</h3>
     <p><strong>Access:</strong> request a copy of the personal data we hold.</p>
