@@ -908,6 +908,23 @@ footer {
 
 .ea-success.visible { display: flex; }
 
+.ea-error {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 600px;
+  margin: 14px auto 0;
+  padding: 14px 20px;
+  background: rgba(196, 97, 74, 0.15);
+  border: 1.5px solid rgba(196, 97, 74, 0.7);
+  font-size: 14px;
+  color: #F5C4B8;
+  font-weight: 500;
+}
+
+.ea-error.visible { display: flex; }
+
 /* ── WAITLIST FORM ── */
 .waitlist-form {
   display: flex;
@@ -948,6 +965,22 @@ footer {
 }
 
 .waitlist-success.visible { display: flex; }
+
+.waitlist-error {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  background: rgba(196, 97, 74, 0.08);
+  border: 1.5px solid var(--rose);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--rose);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.waitlist-error.visible { display: flex; }
 
 .hero-note {
   font-size: 11px;
@@ -1459,7 +1492,10 @@ footer {
         </button>
       </div>
       <div class="waitlist-success" id="hero-success">
-        ✓ You're on the list. We'll reach out when Tether is ready for you.
+        ✓ You're on the list. We'll send your invite soon.
+      </div>
+      <div class="waitlist-error" id="hero-error">
+        Something went wrong. Please try again.
       </div>
       <div class="hero-note" id="hero-count">Free to use · No credit card required</div>
     </div>
@@ -1732,6 +1768,9 @@ footer {
           <div class="waitlist-success" id="pricing-success" style="margin-top:8px;">
             ✓ You're on the list!
           </div>
+          <div class="waitlist-error" id="pricing-error" style="margin-top:8px;">
+            Something went wrong. Please try again.
+          </div>
         </div>
       </div>
     </div>
@@ -1745,9 +1784,9 @@ footer {
 <!-- EARLY ACCESS -->
 <div class="early-access" id="early-access">
   <div class="ea-icon">🤝</div>
-  <div class="ea-eyebrow">Coming Soon</div>
-  <div class="ea-title">Be the first<br><em>to know</em></div>
-  <p class="ea-sub">Built for people who care: everyday check-ins, important milestones, and the people you never want to drift from. Join the waitlist and we'll let you know the moment Tether is ready for you.</p>
+  <div class="ea-eyebrow">Early Access</div>
+  <div class="ea-title">Tether is<br><em>ready</em></div>
+  <p class="ea-sub">Built for people who care: everyday check-ins, important milestones, and the people you never want to drift from. We're onboarding in waves, so join the waitlist and we'll send your invite.</p>
 
   <div class="ea-form" id="ea-form">
     <input class="ea-name-input"  type="text"  id="ea-name"  placeholder="Your first name" autocomplete="given-name" />
@@ -1756,7 +1795,10 @@ footer {
   </div>
 
   <div class="ea-success" id="ea-success">
-    ✓ You're on the list. We'll reach out when Tether is ready for you.
+    ✓ You're on the list. We'll send your invite soon.
+  </div>
+  <div class="ea-error" id="ea-error">
+    Something went wrong. Please try again.
   </div>
 
   <div class="ea-trust">No spam, ever. Unsubscribe anytime.</div>
@@ -1819,6 +1861,8 @@ async function submitEarlyAccess() {
   const emailEl   = document.getElementById('ea-email');
   const formEl    = document.getElementById('ea-form');
   const successEl = document.getElementById('ea-success');
+  const errorEl   = document.getElementById('ea-error');
+  const btn       = formEl ? formEl.querySelector('.ea-submit') : null;
   const name      = nameEl.value.trim();
   const email     = emailEl.value.trim();
 
@@ -1832,8 +1876,10 @@ async function submitEarlyAccess() {
     return;
   }
 
+  if (errorEl) errorEl.classList.remove('visible');
   emailEl.disabled = true;
   nameEl.disabled  = true;
+  if (btn) { btn.textContent = 'Joining...'; btn.disabled = true; }
 
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
@@ -1849,20 +1895,30 @@ async function submitEarlyAccess() {
 
     if (res.ok || res.status === 409) {
       formEl.style.display = 'none';
+      if (errorEl) errorEl.classList.remove('visible');
       successEl.classList.add('visible');
     } else {
       throw new Error(`Status ${res.status}`);
     }
   } catch (err) {
     console.error('Early access error:', err);
-    formEl.style.display = 'none';
-    successEl.classList.add('visible');
+    emailEl.disabled = false;
+    nameEl.disabled  = false;
+    if (btn) { btn.textContent = 'Join the waitlist'; btn.disabled = false; }
+    emailEl.style.borderColor = 'rgba(196,97,74,0.8)';
+    nameEl.style.borderColor  = 'rgba(196,97,74,0.8)';
+    if (errorEl) errorEl.classList.add('visible');
+    setTimeout(() => {
+      emailEl.style.borderColor = '';
+      nameEl.style.borderColor  = '';
+    }, 2000);
   }
 }
 
 async function submitWaitlist(source) {
   const inputEl   = document.getElementById(`${source}-email`);
   const successEl = document.getElementById(`${source}-success`);
+  const errorEl   = document.getElementById(`${source}-error`);
   const email     = inputEl.value.trim();
 
   if (!isValidEmail(email)) {
@@ -1875,6 +1931,7 @@ async function submitWaitlist(source) {
     return;
   }
 
+  if (errorEl) errorEl.classList.remove('visible');
   inputEl.disabled = true;
   const btn = inputEl.parentElement
     ? inputEl.parentElement.querySelector('button')
@@ -1896,6 +1953,7 @@ async function submitWaitlist(source) {
     if (res.ok || res.status === 409) {
       inputEl.style.display = 'none';
       if (btn) btn.style.display = 'none';
+      if (errorEl) errorEl.classList.remove('visible');
       successEl.classList.add('visible');
       if (source === 'hero') {
         const countEl = document.getElementById('hero-count');
@@ -1906,9 +1964,11 @@ async function submitWaitlist(source) {
     }
   } catch (err) {
     console.error('Waitlist error:', err);
-    inputEl.style.display = 'none';
-    if (btn) btn.style.display = 'none';
-    successEl.classList.add('visible');
+    inputEl.disabled = false;
+    if (btn) { btn.textContent = 'Join the waitlist'; btn.disabled = false; }
+    inputEl.style.borderColor = 'var(--rose)';
+    if (errorEl) errorEl.classList.add('visible');
+    setTimeout(() => { inputEl.style.borderColor = ''; }, 2000);
   }
 }
 
