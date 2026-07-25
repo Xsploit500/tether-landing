@@ -1483,10 +1483,19 @@ footer {
       <div class="waitlist-form">
         <input
           class="waitlist-input"
+          type="text"
+          id="hero-name"
+          placeholder="Your first name"
+          autocomplete="given-name"
+          required
+        />
+        <input
+          class="waitlist-input"
           type="email"
           id="hero-email"
           placeholder="Enter your email address"
           autocomplete="email"
+          required
         />
         <button class="btn-primary" style="padding:13px 28px;font-size:15px;" onclick="submitWaitlist('hero')">
           Join the waitlist
@@ -1764,7 +1773,8 @@ footer {
           <li>Birthday &amp; custom reminders</li>
         </ul>
         <div class="price-waitlist">
-          <input class="waitlist-input" type="email" id="pricing-email" placeholder="Enter your email" autocomplete="email" />
+          <input class="waitlist-input" type="text" id="pricing-name" placeholder="Your first name" autocomplete="given-name" required />
+          <input class="waitlist-input" type="email" id="pricing-email" placeholder="Enter your email" autocomplete="email" required />
           <button class="btn-primary" onclick="submitWaitlist('pricing')">Join the waitlist</button>
           <div class="waitlist-success" id="pricing-success" style="margin-top:8px;">
             ✓ You're on the list!
@@ -1790,8 +1800,8 @@ footer {
   <p class="ea-sub">Built for people who care: everyday check-ins, important milestones, and the people you never want to drift from. We're onboarding in waves, so join the waitlist and we'll send your invite.</p>
 
   <div class="ea-form" id="ea-form">
-    <input class="ea-name-input"  type="text"  id="ea-name"  placeholder="Your first name" autocomplete="given-name" />
-    <input class="ea-email-input" type="email" id="ea-email" placeholder="Email address"   autocomplete="email" />
+    <input class="ea-name-input"  type="text"  id="ea-name"  placeholder="Your first name" autocomplete="given-name" required />
+    <input class="ea-email-input" type="email" id="ea-email" placeholder="Email address"   autocomplete="email" required />
     <button class="ea-submit" onclick="submitEarlyAccess()">Join the waitlist</button>
   </div>
 
@@ -1867,6 +1877,16 @@ async function submitEarlyAccess() {
   const name      = nameEl.value.trim();
   const email     = emailEl.value.trim();
 
+  if (!name) {
+    nameEl.style.borderColor = 'rgba(196,97,74,0.8)';
+    nameEl.placeholder = 'Please enter your first name';
+    setTimeout(() => {
+      nameEl.style.borderColor = '';
+      nameEl.placeholder = 'Your first name';
+    }, 2000);
+    return;
+  }
+
   if (!isValidEmail(email)) {
     emailEl.style.borderColor = 'rgba(196,97,74,0.8)';
     emailEl.placeholder = 'Please enter a valid email';
@@ -1891,7 +1911,7 @@ async function submitEarlyAccess() {
         'Authorization': `Bearer ${SUPABASE_ANON}`,
         'Prefer':        'return=minimal',
       },
-      body: JSON.stringify({ email, name: name || null, source: 'early-access' }),
+      body: JSON.stringify({ email, name, source: 'early-access' }),
     });
 
     if (res.ok || res.status === 409) {
@@ -1917,10 +1937,22 @@ async function submitEarlyAccess() {
 }
 
 async function submitWaitlist(source) {
+  const nameEl    = document.getElementById(`${source}-name`);
   const inputEl   = document.getElementById(`${source}-email`);
   const successEl = document.getElementById(`${source}-success`);
   const errorEl   = document.getElementById(`${source}-error`);
+  const name      = nameEl.value.trim();
   const email     = inputEl.value.trim();
+
+  if (!name) {
+    nameEl.style.borderColor = 'var(--rose)';
+    nameEl.placeholder = 'Please enter your first name';
+    setTimeout(() => {
+      nameEl.style.borderColor = '';
+      nameEl.placeholder = 'Your first name';
+    }, 2000);
+    return;
+  }
 
   if (!isValidEmail(email)) {
     inputEl.style.borderColor = 'var(--rose)';
@@ -1933,6 +1965,7 @@ async function submitWaitlist(source) {
   }
 
   if (errorEl) errorEl.classList.remove('visible');
+  nameEl.disabled = true;
   inputEl.disabled = true;
   const btn = inputEl.parentElement
     ? inputEl.parentElement.querySelector('button')
@@ -1948,10 +1981,11 @@ async function submitWaitlist(source) {
         'Authorization': `Bearer ${SUPABASE_ANON}`,
         'Prefer':        'return=minimal',
       },
-      body: JSON.stringify({ email, source }),
+      body: JSON.stringify({ email, name, source }),
     });
 
     if (res.ok || res.status === 409) {
+      nameEl.style.display = 'none';
       inputEl.style.display = 'none';
       if (btn) btn.style.display = 'none';
       if (errorEl) errorEl.classList.remove('visible');
@@ -1965,6 +1999,7 @@ async function submitWaitlist(source) {
     }
   } catch (err) {
     console.error('Waitlist error:', err);
+    nameEl.disabled = false;
     inputEl.disabled = false;
     if (btn) { btn.textContent = 'Join the waitlist'; btn.disabled = false; }
     inputEl.style.borderColor = 'var(--rose)';
@@ -2017,8 +2052,8 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter') return;
   const id = e.target.id;
-  if (id === 'hero-email')     submitWaitlist('hero');
-  if (id === 'pricing-email')  submitWaitlist('pricing');
+  if (id === 'hero-name' || id === 'hero-email')     submitWaitlist('hero');
+  if (id === 'pricing-name' || id === 'pricing-email')  submitWaitlist('pricing');
   if (id === 'ea-name' || id === 'ea-email') submitEarlyAccess();
 });
 
