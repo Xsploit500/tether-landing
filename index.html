@@ -368,6 +368,8 @@ nav {
   box-shadow: 0 24px 64px rgba(42,107,60,0.08), 0 2px 8px rgba(0,0,0,0.04);
   position: relative;
   transition: background 0.3s, border-color 0.3s;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .app-preview::before {
@@ -403,7 +405,11 @@ nav {
   font-weight: 500;
 }
 
-.preview-body { padding: 20px; }
+.preview-body {
+  padding: 20px;
+  min-width: 0;
+  box-sizing: border-box;
+}
 
 .preview-greeting {
   font-family: 'Instrument Serif', serif;
@@ -1151,25 +1157,22 @@ footer {
 .preview-slideshow {
   position: relative;
   overflow: hidden;
-  height: 420px;
+  min-height: 420px;
+  height: auto;
 }
 
 .preview-slide {
   position: absolute;
   top: 0; left: 0;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   opacity: 0;
   pointer-events: none;
-  transform: translateX(60px);
+  transform: none;
   transition: opacity 0.5s ease, transform 0.5s ease;
   will-change: transform, opacity;
-}
-
-.preview-slide.active {
-  position: relative;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(0);
 }
 
 .preview-slide.exit-left {
@@ -1212,6 +1215,14 @@ footer {
   transform: translateY(-40px);
 }
 
+/* Active must follow enter/exit so it wins when classes overlap. */
+.preview-slide.active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
 /* Slide indicators */
 .slide-indicators {
   display: flex;
@@ -1245,6 +1256,10 @@ footer {
   padding: 14px;
   margin-bottom: 8px;
   border-radius: 4px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .ai-starter-label {
@@ -1263,6 +1278,11 @@ footer {
   line-height: 1.6;
   font-style: italic;
   margin-bottom: 12px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .ai-starter-actions {
@@ -1432,7 +1452,7 @@ footer {
   }
   .ea-name-input { border-right: 1.5px solid rgba(255,255,255,0.25); }
   .ea-submit { width: 100%; padding: 16px; }
-  .preview-slideshow { height: 420px; }
+  .preview-slideshow { min-height: 420px; height: auto; }
   footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 20px; }
 }
 </style>
@@ -1568,7 +1588,7 @@ footer {
           <div class="preview-sub">Suggested opener from your notes</div>
           <div class="ai-starter-card">
             <div class="ai-starter-label">Suggested opener</div>
-            <div class="ai-starter-text">"Hey Mom, I've been thinking about you. How did that doctor's appointment go last week? Hope everything went smoothly."</div>
+            <div class="ai-starter-text">"Hey Mom, I've been thinking about you. How did the move go last week? Hope it all went smoothly."</div>
             <div class="ai-starter-actions">
               <button class="ai-btn ai-btn-primary">Copy message</button>
               <button class="ai-btn ai-btn-ghost">Try another</button>
