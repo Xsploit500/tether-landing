@@ -1223,6 +1223,19 @@ footer {
   transform: none;
 }
 
+/* Leaving slide keeps .active during the transition; keep it out of flow
+   so height:auto does not stack two slides and inflate the preview. */
+.preview-slide.active.exit-left,
+.preview-slide.active.exit-right,
+.preview-slide.active.exit-up,
+.preview-slide.active.exit-down {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
 /* Slide indicators */
 .slide-indicators {
   display: flex;
