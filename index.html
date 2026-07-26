@@ -1541,10 +1541,6 @@ footer {
   .features-section .demo-frame--digest {
     max-width: 320px;
   }
-  .reveal.reveal-left,
-  .reveal.reveal-right {
-    transform: translateY(40px) scale(0.98);
-  }
   .features-section { padding: 48px 20px; }
   .pricing-grid { grid-template-columns: 1fr; }
   .pricing-section { padding: 48px 20px; }
@@ -2235,10 +2231,6 @@ document.addEventListener('keydown', (e) => {
   const DURATION = 750;
 
   function startTransform(el) {
-    const mobile = window.matchMedia('(max-width: 768px)').matches;
-    if (mobile && (el.classList.contains('reveal-left') || el.classList.contains('reveal-right'))) {
-      return 'translateY(40px) scale(0.98)';
-    }
     if (el.classList.contains('reveal-left')) return 'translateX(-56px) scale(0.96)';
     if (el.classList.contains('reveal-right')) return 'translateX(56px) scale(0.96)';
     return 'translateY(56px) scale(0.96)';
