@@ -1385,26 +1385,14 @@ footer {
 }
 
 /* ── SCROLL REVEAL ── */
-/* Initial pose only — motion is driven by JS (Web Animations), like the marketing page. */
+/* Opacity only in CSS. Transforms are inline via JS so Safari can't leave a scaled/offset pose. */
 .reveal {
   opacity: 0;
-  transform: translateY(56px) scale(0.96);
-  will-change: opacity, transform;
-}
-
-.reveal.reveal-left {
-  transform: translateX(-56px) scale(0.96);
-}
-
-.reveal.reveal-right {
-  transform: translateX(56px) scale(0.96);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
-    transform: none;
-    will-change: auto;
   }
 }
 
@@ -1480,6 +1468,8 @@ footer {
     row-gap: 28px;
     column-gap: 0;
     align-items: start;
+    max-width: none;
+    width: 100%;
   }
   .hero-copy,
   #hero-waitlist {
@@ -2258,10 +2248,11 @@ document.addEventListener('keydown', (e) => {
   const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
   const DURATION = 750;
 
+  // No scale(): on mobile a lingering scale leaves dark side strips.
   function startTransform(el) {
-    if (el.classList.contains('reveal-left')) return 'translateX(-56px) scale(0.96)';
-    if (el.classList.contains('reveal-right')) return 'translateX(56px) scale(0.96)';
-    return 'translateY(56px) scale(0.96)';
+    if (el.classList.contains('reveal-left')) return 'translate3d(-56px, 0, 0)';
+    if (el.classList.contains('reveal-right')) return 'translate3d(56px, 0, 0)';
+    return 'translate3d(0, 56px, 0)';
   }
 
   function startDelay(el) {
@@ -2270,23 +2261,27 @@ document.addEventListener('keydown', (e) => {
     return 0;
   }
 
-  // Instant snap — equivalent to Framer controls.set(...)
   function setStartPose(el) {
     el.getAnimations().forEach((a) => a.cancel());
     el.style.opacity = '0';
     el.style.transform = startTransform(el);
   }
 
-  // Enter animation — equivalent to Framer controls.start(...)
+  function commitShown(el) {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  }
+
   function animateIn(el) {
     const from = startTransform(el);
     el.getAnimations().forEach((a) => a.cancel());
     el.style.opacity = '0';
     el.style.transform = from;
-    el.animate(
+
+    const anim = el.animate(
       [
         { opacity: 0, transform: from },
-        { opacity: 1, transform: 'translate(0px, 0px) scale(1)' },
+        { opacity: 1, transform: 'translate3d(0, 0, 0)' },
       ],
       {
         duration: DURATION,
@@ -2295,6 +2290,14 @@ document.addEventListener('keydown', (e) => {
         fill: 'forwards',
       }
     );
+
+    // Commit final styles so nothing can stay offset/scaled after the tween.
+    anim.finished.then(() => {
+      commitShown(el);
+      anim.cancel();
+    }).catch(() => {
+      commitShown(el);
+    });
   }
 
   const ready = new WeakMap();
@@ -2304,7 +2307,6 @@ document.addEventListener('keydown', (e) => {
       const el = entry.target;
 
       if (!entry.isIntersecting) {
-        // Fully off-screen only: snap back (no exit tween => no edge flicker).
         setStartPose(el);
         ready.set(el, true);
         return;
