@@ -1385,11 +1385,11 @@ footer {
 }
 
 /* ── SCROLL REVEAL ── */
+/* Initial pose only — motion is driven by JS (Web Animations), like the marketing page. */
 .reveal {
   opacity: 0;
   transform: translateY(56px) scale(0.96);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.reveal-left {
@@ -1400,24 +1400,11 @@ footer {
   transform: translateX(56px) scale(0.96);
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
-}
-
-/* Instant snap to start pose while off-screen (no exit animation / flicker). */
-.reveal.reveal-reset {
-  transition: none !important;
-}
-
-.reveal-delay-1 { transition-delay: 0.14s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
-    transition: none;
+    will-change: auto;
   }
 }
 
@@ -2233,43 +2220,85 @@ document.addEventListener('keydown', (e) => {
 })();
 
 (function() {
-  const els = document.querySelectorAll('.reveal');
+  const els = Array.from(document.querySelectorAll('.reveal'));
   if (!els.length) return;
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    els.forEach(el => el.classList.add('visible'));
+    els.forEach((el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
     return;
   }
 
-  // Same idea as the marketing homepage Reveal:
-  // - threshold 0 => "any pixel visible"
-  // - reset start pose only when fully off-screen (no exit flicker)
-  // - replay slide-in whenever the element re-enters from either direction
+  const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  const DURATION = 750;
+
+  function startTransform(el) {
+    const mobile = window.matchMedia('(max-width: 768px)').matches;
+    if (mobile && (el.classList.contains('reveal-left') || el.classList.contains('reveal-right'))) {
+      return 'translateY(40px) scale(0.98)';
+    }
+    if (el.classList.contains('reveal-left')) return 'translateX(-56px) scale(0.96)';
+    if (el.classList.contains('reveal-right')) return 'translateX(56px) scale(0.96)';
+    return 'translateY(56px) scale(0.96)';
+  }
+
+  function startDelay(el) {
+    if (el.classList.contains('reveal-delay-1')) return 140;
+    if (el.classList.contains('reveal-delay-2')) return 200;
+    return 0;
+  }
+
+  // Instant snap — equivalent to Framer controls.set(...)
+  function setStartPose(el) {
+    el.getAnimations().forEach((a) => a.cancel());
+    el.style.opacity = '0';
+    el.style.transform = startTransform(el);
+  }
+
+  // Enter animation — equivalent to Framer controls.start(...)
+  function animateIn(el) {
+    const from = startTransform(el);
+    el.getAnimations().forEach((a) => a.cancel());
+    el.style.opacity = '0';
+    el.style.transform = from;
+    el.animate(
+      [
+        { opacity: 0, transform: from },
+        { opacity: 1, transform: 'translate(0px, 0px) scale(1)' },
+      ],
+      {
+        duration: DURATION,
+        delay: startDelay(el),
+        easing: EASE,
+        fill: 'forwards',
+      }
+    );
+  }
+
+  const ready = new WeakMap();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const el = entry.target;
 
       if (!entry.isIntersecting) {
-        el.classList.add('reveal-reset');
-        el.classList.remove('visible');
-        void el.offsetWidth;
-        el.classList.remove('reveal-reset');
-        el.dataset.ready = '1';
+        // Fully off-screen only: snap back (no exit tween => no edge flicker).
+        setStartPose(el);
+        ready.set(el, true);
         return;
       }
 
-      if (el.dataset.ready !== '1') return;
-      el.dataset.ready = '0';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          el.classList.add('visible');
-        });
-      });
+      if (!ready.get(el)) return;
+      ready.set(el, false);
+      animateIn(el);
     });
   }, { threshold: 0 });
 
   els.forEach((el) => {
-    el.dataset.ready = '1';
+    setStartPose(el);
+    ready.set(el, true);
     observer.observe(el);
   });
 })();
