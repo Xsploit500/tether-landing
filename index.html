@@ -1466,7 +1466,7 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  nav { padding: 16px 20px; }
+  nav { padding: 16px 16px; }
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .hamburger { display: flex; }
@@ -1476,10 +1476,15 @@ footer {
       "copy"
       "visual"
       "form";
-    padding: 40px 20px 48px;
+    padding: 40px 0 48px;
     row-gap: 28px;
     column-gap: 0;
     align-items: start;
+  }
+  .hero-copy,
+  #hero-waitlist {
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .hero h1 { font-size: clamp(32px, 9vw, 42px); }
   .hero p { font-size: 15px; }
@@ -1494,15 +1499,29 @@ footer {
   .waitlist-form .btn-primary {
     width: 100%;
   }
-  .hero-visual {
+  .hero-visual,
+  .app-preview,
+  .hero-visual .demo-frame,
+  .app-preview .demo-frame {
     width: 100%;
+    max-width: none;
+    margin: 0;
   }
   .app-preview {
-    width: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
   .section {
-    padding: 48px 20px;
+    padding: 48px 0;
     max-width: 100%;
+  }
+  .section-eyebrow,
+  .section-title,
+  .section-sub,
+  .demo-copy {
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .section-title { font-size: clamp(26px, 7vw, 34px); }
   .section-sub { margin-bottom: 36px !important; }
@@ -1532,19 +1551,28 @@ footer {
   .demo-media {
     width: 100%;
   }
-  .demo-frame {
-    max-width: none;
-    width: 100%;
-    margin: 0;
-  }
+  .demo-frame,
   .features-section .demo-frame--digest {
     max-width: none;
     width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
   }
-  .features-section { padding: 48px 20px; }
+  .features-section {
+    padding: 48px 0;
+  }
+  .features-section .section-eyebrow,
+  .features-section .section-title,
+  .features-section .section-sub {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .pricing-grid { grid-template-columns: 1fr; }
-  .pricing-section { padding: 48px 20px; }
-  .early-access { padding: 72px 20px; }
+  .pricing-section { padding: 48px 16px; }
+  .early-access { padding: 72px 16px; }
+  .quote-section { padding: 48px 16px; }
   .ea-form { flex-direction: column; border: none; background: none; gap: 8px; }
   .ea-name-input,
   .ea-email-input {
@@ -1556,7 +1584,7 @@ footer {
   .ea-name-input { border-right: 1.5px solid rgba(255,255,255,0.25); }
   .ea-submit { width: 100%; padding: 16px; }
   .preview-slideshow { min-height: 420px; height: auto; }
-  footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 20px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 16px; }
 }
 </style>
 </head>
