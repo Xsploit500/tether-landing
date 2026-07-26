@@ -37,11 +37,6 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── FONT DISPLAY ── */
-@font-face {
-  font-display: swap;
-}
-
 /* ── HAMBURGER MENU ── */
 .hamburger {
   display: none;
@@ -96,29 +91,11 @@
   margin-top: 8px;
 }
 
-.mobile-menu-footer {
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-.mobile-theme-toggle {
-  background: var(--cream);
-  border: 1px solid var(--border);
-  padding: 8px 16px;
-  font-family: 'Geist', sans-serif;
-  font-size: 13px;
-  color: var(--muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background 0.2s;
-}
 
-.mobile-theme-toggle:hover { background: var(--green-l); color: var(--green); }
+
+
+
 
 /* ── LIGHT MODE TOKENS ── */
 :root {
@@ -158,7 +135,10 @@
   --preview-bg: #252118;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
 
 body {
   background: var(--bg);
@@ -288,20 +268,9 @@ nav {
 
 .btn-primary:hover { background: var(--green-d); transform: translateY(-1px); }
 
-.btn-outline {
-  background: transparent;
-  color: var(--green);
-  border: 1.5px solid var(--green);
-  padding: 10px 22px;
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
 
-.btn-outline:hover { background: var(--green-l); }
+
+
 
 /* ── HERO ── */
 .hero {
@@ -364,13 +333,7 @@ nav {
   max-width: 460px;
 }
 
-.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.hero-note {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 14px;
-}
 
 /* ── APP PREVIEW ── */
 .app-preview {
@@ -385,138 +348,11 @@ nav {
   overflow: hidden;
 }
 
-.app-preview::before { display: none; }
-
 .app-preview .demo-frame {
   border: none;
   border-radius: 0;
   box-shadow: none;
   background: transparent;
-}
-
-.preview-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  transition: background 0.3s, border-color 0.3s;
-}
-
-.preview-dots { display: flex; gap: 5px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; }
-.d-r { background: #FF6B6B; }
-.d-y { background: #FFD93D; }
-.d-g { background: #6BCB77; }
-
-.preview-title {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.preview-body {
-  padding: 20px;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-.preview-greeting {
-  font-family: 'Instrument Serif', serif;
-  font-size: 17px;
-  color: var(--dark);
-  margin-bottom: 4px;
-}
-
-.preview-sub {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-
-.contact-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  margin-bottom: 6px;
-  transition: background 0.15s, border-color 0.3s;
-}
-
-.contact-row:hover { background: var(--bg); }
-
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  flex-shrink: 0;
-  font-family: 'Geist', sans-serif;
-}
-
-.av-1 { background: var(--green-l); color: var(--green); }
-.av-2 { background: var(--rose-l);  color: var(--rose); }
-.av-3 { background: var(--amber-l); color: var(--amber); }
-
-.contact-info { flex: 1; }
-
-.contact-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--dark);
-}
-
-.contact-meta {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 1px;
-}
-
-.health-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.h-green  { background: #4CAF50; }
-.h-amber  { background: #FF9800; }
-.h-red    { background: #F44336; }
-
-.preview-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin-top: 14px;
-}
-
-.p-stat {
-  text-align: center;
-  padding: 10px 6px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  transition: background 0.3s, border-color 0.3s;
-}
-
-.p-stat-num {
-  font-family: 'Instrument Serif', serif;
-  font-size: 22px;
-  color: var(--green);
-}
-
-.p-stat-label {
-  font-size: 8px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 2px;
-  font-family: 'Geist Mono', monospace;
 }
 
 /* ── DIVIDER ── */
@@ -1013,8 +849,7 @@ footer {
 
 .price-waitlist { margin-top: 8px; }
 .price-waitlist .waitlist-input { width: 100%; margin-bottom: 8px; }
-.price-waitlist .btn-primary,
-.price-waitlist .btn-outline { width: 100%; padding: 13px; }
+.price-waitlist .btn-primary { width: 100%; padding: 13px; }
 
 /* ── MODALS ── */
 .modal-overlay {
@@ -1107,282 +942,6 @@ footer {
   color: var(--green-d);
 }
 
-/* Contact button — override .modal a rules so button styling shows through */
-.modal a.btn-secondary {
-  color: var(--green);
-  text-decoration: none;
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-.modal a.btn-secondary:hover {
-  color: var(--green-d);
-  background: var(--surface-hover);
-  border-color: var(--green);
-}
-
-/* Contact form inside modal */
-.contact-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 14px;
-}
-
-.contact-field label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.contact-field input,
-.contact-field textarea {
-  padding: 12px 16px;
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  color: var(--dark);
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.2s;
-  resize: vertical;
-}
-
-.contact-field input:focus,
-.contact-field textarea:focus { border-color: var(--green); }
-
-.contact-field input::placeholder,
-.contact-field textarea::placeholder { color: var(--muted); }
-
-.contact-success {
-  display: none;
-  padding: 14px 18px;
-  background: var(--green-l);
-  border: 1.5px solid var(--green);
-  font-size: 14px;
-  color: var(--green);
-  font-weight: 500;
-  margin-top: 8px;
-}
-
-.contact-success.visible { display: block; }
-
-/* ── SLIDESHOW ── */
-.preview-slideshow {
-  position: relative;
-  overflow: hidden;
-  min-height: 420px;
-  height: auto;
-}
-
-.preview-slide {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  opacity: 0;
-  pointer-events: none;
-  transform: none;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  will-change: transform, opacity;
-}
-
-.preview-slide.exit-left {
-  position: absolute;
-  opacity: 0;
-  transform: translateX(-60px);
-}
-
-.preview-slide.exit-right {
-  position: absolute;
-  opacity: 0;
-  transform: translateX(60px);
-}
-
-.preview-slide.exit-up {
-  position: absolute;
-  opacity: 0;
-  transform: translateY(-40px);
-}
-
-.preview-slide.exit-down {
-  position: absolute;
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.preview-slide.enter-left {
-  transform: translateX(-60px);
-}
-
-.preview-slide.enter-right {
-  transform: translateX(60px);
-}
-
-.preview-slide.enter-up {
-  transform: translateY(40px);
-}
-
-.preview-slide.enter-down {
-  transform: translateY(-40px);
-}
-
-/* Active must follow enter/exit so it wins when classes overlap. */
-.preview-slide.active {
-  position: relative;
-  opacity: 1;
-  pointer-events: auto;
-  transform: none;
-}
-
-/* Leaving slide keeps .active during the transition; keep it out of flow
-   so height:auto does not stack two slides and inflate the preview. */
-.preview-slide.active.exit-left,
-.preview-slide.active.exit-right,
-.preview-slide.active.exit-up,
-.preview-slide.active.exit-down {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-}
-
-/* Slide indicators */
-.slide-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 0 14px;
-  border-top: 1px solid var(--border);
-  transition: border-color 0.3s;
-}
-
-.slide-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--border);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.slide-dot.active {
-  background: var(--green);
-  transform: scale(1.3);
-}
-
-/* AI starter card */
-.ai-starter-card {
-  background: var(--green-l);
-  border: 1px solid var(--green);
-  padding: 14px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-.ai-starter-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--green);
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-family: 'Geist Mono', monospace;
-}
-
-.ai-starter-text {
-  font-size: 12px;
-  color: var(--dark);
-  line-height: 1.6;
-  font-style: italic;
-  margin-bottom: 12px;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  max-width: 100%;
-  min-width: 0;
-}
-
-.ai-starter-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.ai-btn {
-  font-family: 'Geist', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-  transition: background 0.15s;
-}
-
-.ai-btn-primary {
-  background: var(--green);
-  color: white;
-}
-
-.ai-btn-primary:hover { background: var(--green-d); }
-
-.ai-btn-ghost {
-  background: transparent;
-  color: var(--green);
-  border: 1px solid var(--green);
-}
-
-.ai-btn-ghost:hover { background: var(--green-l); }
-
-/* Report rows */
-.report-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.report-label {
-  font-size: 11px;
-  color: var(--muted);
-  width: 130px;
-  flex-shrink: 0;
-}
-
-.report-bar-wrap {
-  flex: 1;
-  height: 6px;
-  background: var(--border);
-  border-radius: 100px;
-  overflow: hidden;
-}
-
-.report-bar {
-  height: 100%;
-  border-radius: 100px;
-  transition: width 0.8s ease;
-}
-
-.report-val {
-  font-size: 11px;
-  font-weight: 600;
-  font-family: 'Geist Mono', monospace;
-  width: 34px;
-  text-align: right;
-  flex-shrink: 0;
-}
 
 /* ── SCROLL REVEAL ── */
 /* Opacity only in CSS. Transforms are inline via JS so Safari can't leave a scaled/offset pose. */
@@ -1412,7 +971,6 @@ footer {
 
 /* ── RIPPLE ── */
 .btn-primary,
-.btn-outline,
 .ea-submit {
   position: relative;
   overflow: hidden;
@@ -1427,7 +985,6 @@ footer {
   pointer-events: none;
 }
 
-.btn-outline .ripple-wave,
 .ea-submit .ripple-wave {
   background: rgba(42,107,60,0.15);
 }
@@ -1573,7 +1130,6 @@ footer {
   }
   .ea-name-input { border-right: 1.5px solid rgba(255,255,255,0.25); }
   .ea-submit { width: 100%; padding: 16px; }
-  .preview-slideshow { min-height: 420px; height: auto; }
   footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 16px; }
 }
 </style>
@@ -1653,7 +1209,7 @@ footer {
       </button>
     </div>
     <div class="waitlist-success" id="hero-success">
-      ✓ You're on the list. I'll email your invite soon. Keep an eye on Promotions or spam, just in case.
+      ✓ You're on the list. We'll email your invite soon. Keep an eye on Promotions or spam, just in case.
     </div>
     <div class="waitlist-error" id="hero-error">
       Something went wrong. Please try again.
@@ -1889,7 +1445,7 @@ footer {
   </div>
 
   <div class="ea-success" id="ea-success">
-    ✓ You're on the list. I'll email your invite soon. Keep an eye on Promotions or spam, just in case.
+    ✓ You're on the list. We'll email your invite soon. Keep an eye on Promotions or spam, just in case.
   </div>
   <div class="ea-error" id="ea-error">
     Something went wrong. Please try again.
@@ -2141,76 +1697,6 @@ document.addEventListener('keydown', (e) => {
 });
 
 (function() {
-  const slides     = Array.from(document.querySelectorAll('.preview-slide'));
-  if (!slides.length) return;
-  const dots       = Array.from(document.querySelectorAll('.slide-dot'));
-  const titleEl    = document.getElementById('preview-title');
-  const directions = ['left', 'right', 'up', 'down'];
-  let current      = 0;
-  let timer        = null;
-  let isAnimating  = false;
-
-  function opposite(dir) {
-    return { left: 'right', right: 'left', up: 'down', down: 'up' }[dir];
-  }
-
-  function goToSlide(index) {
-    if (isAnimating || index === current) return;
-    isAnimating = true;
-
-    const dir      = directions[Math.floor(Math.random() * directions.length)];
-    const entering = slides[index];
-    const leaving  = slides[current];
-
-    entering.classList.remove('active');
-    entering.classList.add('enter-' + dir);
-    entering.offsetHeight;
-
-    leaving.classList.add('exit-' + opposite(dir));
-    entering.classList.remove('enter-' + dir);
-    entering.classList.add('active');
-
-    dots[current].classList.remove('active');
-    dots[index].classList.add('active');
-    if (titleEl) titleEl.textContent = entering.dataset.title || 'Tether';
-
-    setTimeout(() => {
-      leaving.classList.remove('active', 'exit-left', 'exit-right', 'exit-up', 'exit-down');
-      isAnimating = false;
-      current = index;
-      if (window.runSlideCounters) window.runSlideCounters(entering);
-    }, 520);
-  }
-
-  window.goToSlide = goToSlide;
-
-  function next() {
-    goToSlide((current + 1) % slides.length);
-  }
-
-  function startTimer() {
-    timer = setInterval(next, 3500);
-  }
-
-  function resetTimer() {
-    clearInterval(timer);
-    startTimer();
-  }
-
-  const wrapper = document.querySelector('.app-preview');
-  if (wrapper) {
-    wrapper.addEventListener('mouseenter', () => clearInterval(timer));
-    wrapper.addEventListener('mouseleave', startTimer);
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { goToSlide(i); resetTimer(); });
-  });
-
-  startTimer();
-})();
-
-(function() {
   const el     = document.getElementById('typewriter-text');
   const cursor = document.querySelector('.typewriter-cursor');
   if (!el) return;
@@ -2325,41 +1811,8 @@ document.addEventListener('keydown', (e) => {
   });
 })();
 
-function animateCounter(el, target, suffix) {
-  const duration = 800;
-  const start    = performance.now();
-  const isFloat  = target % 1 !== 0;
 
-  function step(now) {
-    const elapsed  = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased    = 1 - Math.pow(1 - progress, 3);
-    const value    = isFloat
-      ? (eased * target).toFixed(1)
-      : Math.round(eased * target);
-    el.textContent = value + (suffix || '');
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
-
-window.runSlideCounters = function(slide) {
-  slide.querySelectorAll('.p-stat-num').forEach(el => {
-    const raw   = el.textContent.trim();
-    const match = raw.match(/^(\d+\.?\d*)([a-zA-Z%°]*)$/);
-    if (!match) return;
-    const target = parseFloat(match[1]);
-    const suffix = match[2] || '';
-    el.textContent = '0' + suffix;
-    animateCounter(el, target, suffix);
-  });
-};
-
-const firstSlide = document.querySelector('.preview-slide.active');
-if (firstSlide) setTimeout(() => window.runSlideCounters(firstSlide), 400);
-
-document.querySelectorAll('.btn-primary, .btn-outline, .ea-submit').forEach(btn => {
+document.querySelectorAll('.btn-primary, .ea-submit').forEach(btn => {
   btn.addEventListener('click', function(e) {
     const rect   = btn.getBoundingClientRect();
     const size   = Math.max(rect.width, rect.height);
