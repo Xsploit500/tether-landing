@@ -1405,6 +1405,11 @@ footer {
   transform: translate(0, 0) scale(1);
 }
 
+/* Instant snap to start pose while off-screen (no exit animation / flicker). */
+.reveal.reveal-reset {
+  transition: none !important;
+}
+
 .reveal-delay-1 { transition-delay: 0.14s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 
@@ -2236,27 +2241,34 @@ document.addEventListener('keydown', (e) => {
     return;
   }
 
-  // threshold 0: intersect = any pixel visible. Reset only when fully gone.
+  // Same idea as the marketing homepage Reveal:
+  // - threshold 0 => "any pixel visible"
+  // - reset start pose only when fully off-screen (no exit flicker)
+  // - replay slide-in whenever the element re-enters from either direction
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       const el = entry.target;
 
       if (!entry.isIntersecting) {
-        el.style.transition = 'none';
+        el.classList.add('reveal-reset');
         el.classList.remove('visible');
         void el.offsetWidth;
-        el.style.transition = '';
+        el.classList.remove('reveal-reset');
         el.dataset.ready = '1';
         return;
       }
 
-      if (el.dataset.ready === '0') return;
+      if (el.dataset.ready !== '1') return;
       el.dataset.ready = '0';
-      requestAnimationFrame(() => el.classList.add('visible'));
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.classList.add('visible');
+        });
+      });
     });
   }, { threshold: 0 });
 
-  els.forEach(el => {
+  els.forEach((el) => {
     el.dataset.ready = '1';
     observer.observe(el);
   });
