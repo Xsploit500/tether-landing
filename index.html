@@ -307,12 +307,23 @@ nav {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  grid-template-areas:
+    "copy visual"
+    "form visual";
+  column-gap: 60px;
+  row-gap: 20px;
+  align-items: start;
   padding: 80px 52px;
   max-width: 1200px;
   margin: 0 auto;
 }
+
+.hero-copy { grid-area: copy; }
+.hero-visual {
+  grid-area: visual;
+  min-width: 0;
+}
+#hero-waitlist { grid-area: form; }
 
 .hero-eyebrow {
   display: flex;
@@ -365,22 +376,22 @@ nav {
 .app-preview {
   background: var(--preview-bg);
   border: 1px solid var(--border);
+  border-radius: 16px;
   box-shadow: 0 24px 64px rgba(42,107,60,0.08), 0 2px 8px rgba(0,0,0,0.04);
   position: relative;
   transition: background 0.3s, border-color 0.3s;
   min-width: 0;
   max-width: 100%;
+  overflow: hidden;
 }
 
-.app-preview::before {
-  content: '';
-  position: absolute;
-  top: -6px; left: -6px;
-  right: 6px; bottom: 6px;
-  border: 1px solid var(--border);
-  background: var(--cream);
-  z-index: -1;
-  transition: background 0.3s, border-color 0.3s;
+.app-preview::before { display: none; }
+
+.app-preview .demo-frame {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
 }
 
 .preview-bar {
@@ -518,8 +529,8 @@ nav {
 
 /* ── SECTION ── */
 .section {
-  padding: 80px 52px;
-  max-width: 1200px;
+  padding: 64px 52px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
@@ -550,84 +561,90 @@ nav {
   margin-bottom: 48px;
 }
 
-/* ── HOW IT WORKS ── */
-.steps {
+/* ── DEMO ROWS (how it works + features) ── */
+.demo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.demo-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 36px;
+  align-items: center;
 }
 
-.step {
-  background: var(--surface);
-  padding: 32px 28px;
-  transition: background 0.2s;
-}
+.demo-row > * { min-width: 0; }
 
-.step:hover { background: var(--green-l); }
+.demo-row.demo-row-flip .demo-copy { order: 2; }
+.demo-row.demo-row-flip .demo-media { order: 1; }
 
-.step-num {
+.demo-copy .step-num {
   font-family: 'Instrument Serif', serif;
-  font-size: 48px;
+  font-size: 56px;
   color: var(--border);
   line-height: 1;
   margin-bottom: 16px;
 }
 
-.step h3 {
+.demo-copy h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 400;
   color: var(--dark);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.step p {
-  font-size: 13px;
+.demo-copy p {
+  font-size: 15px;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.7;
+}
+
+.demo-media {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.demo-frame {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 20px 50px -24px rgba(26, 24, 20, 0.45);
+}
+
+.demo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* ── FEATURES ── */
 .features-section {
-  background: var(--green);
-  padding: 80px 52px;
+  background: var(--cream);
+  padding: 56px 52px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-.features-inner { max-width: 1200px; margin: 0 auto; }
-.features-section .section-eyebrow { color: rgba(255,255,255,0.5); }
-.features-section .section-title   { color: white; }
-.features-section .section-sub     { color: rgba(255,255,255,0.55); }
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.1);
+.features-inner { max-width: 1080px; margin: 0 auto; }
+.features-section .section-eyebrow { color: var(--rose); }
+.features-section .section-title   { color: var(--dark); }
+.features-section .section-sub     { color: var(--muted); }
+.features-section .demo-stack { gap: 48px; }
+.features-section .demo-copy h3 { color: var(--dark); }
+.features-section .demo-copy p { color: var(--muted); }
+.features-section .demo-frame {
+  border-color: var(--border);
+  background: var(--surface);
+  box-shadow: 0 16px 40px -24px rgba(26, 24, 20, 0.4);
 }
-
-.feat {
-  background: rgba(255,255,255,0.04);
-  padding: 28px;
-  transition: background 0.2s;
-}
-
-.feat:hover { background: rgba(255,255,255,0.08); }
-
-.feat-icon { font-size: 26px; margin-bottom: 14px; }
-
-.feat h3 {
-  font-family: 'Instrument Serif', serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: white;
-  margin-bottom: 8px;
-}
-
-.feat p {
-  font-size: 13px;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.65;
+.features-section .demo-frame--digest {
+  max-width: 420px;
+  margin-inline: auto;
 }
 
 /* ── QUOTE ── */
@@ -1370,20 +1387,34 @@ footer {
 /* ── SCROLL REVEAL ── */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(56px) scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.reveal-left {
+  transform: translateX(-56px) scale(0.96);
+}
+
+.reveal.reveal-right {
+  transform: translateX(56px) scale(0.96);
 }
 
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0, 0) scale(1);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-1 { transition-delay: 0.14s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-.reveal-delay-5 { transition-delay: 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 
 /* ── TYPEWRITER CURSOR ── */
 .typewriter-cursor {
@@ -1447,13 +1478,84 @@ footer {
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .hamburger { display: flex; }
-  .hero { grid-template-columns: 1fr; padding: 48px 20px; gap: 40px; }
-  .steps { grid-template-columns: 1fr; }
-  .features-grid { grid-template-columns: 1fr; }
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "visual"
+      "form";
+    padding: 40px 20px 48px;
+    row-gap: 28px;
+    column-gap: 0;
+    align-items: start;
+  }
+  .hero h1 { font-size: clamp(32px, 9vw, 42px); }
+  .hero p { font-size: 15px; }
+  .waitlist-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .waitlist-input {
+    min-width: 0;
+    width: 100%;
+  }
+  .waitlist-form .btn-primary {
+    width: 100%;
+  }
+  .hero-visual {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .app-preview {
+    width: 100%;
+  }
+  .section {
+    padding: 48px 20px;
+    max-width: 100%;
+  }
+  .section-title { font-size: clamp(26px, 7vw, 34px); }
+  .section-sub { margin-bottom: 36px !important; }
+  .demo-stack { gap: 48px; }
+  .features-section .demo-stack { gap: 44px; }
+  .demo-row,
+  .demo-row.demo-row-flip {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  /* Always: copy first, image second on phones */
+  .demo-row .demo-copy,
+  .demo-row.demo-row-flip .demo-copy { order: 1 !important; }
+  .demo-row .demo-media,
+  .demo-row.demo-row-flip .demo-media { order: 2 !important; }
+  .demo-copy .step-num {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  .demo-copy h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .demo-copy p {
+    font-size: 14px;
+  }
+  .demo-media {
+    width: 100%;
+  }
+  .demo-frame {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .features-section .demo-frame--digest {
+    max-width: 320px;
+  }
+  .reveal.reveal-left,
+  .reveal.reveal-right {
+    transform: translateY(40px) scale(0.98);
+  }
+  .features-section { padding: 48px 20px; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .section { padding: 60px 20px; }
-  .features-section { padding: 60px 20px; }
-  .pricing-section { padding: 60px 20px; }
+  .pricing-section { padding: 48px 20px; }
   .early-access { padding: 72px 20px; }
   .ea-form { flex-direction: column; border: none; background: none; gap: 8px; }
   .ea-name-input,
@@ -1508,201 +1610,49 @@ footer {
 
 <!-- HERO -->
 <div class="hero">
-  <div>
+  <div class="hero-copy">
     <div class="hero-eyebrow">Relationship Reminders</div>
     <h1>The people you love<br>deserve more than<br><em><span id="typewriter-text"></span><span class="typewriter-cursor">|</span></em></h1>
     <p>Tether gently reminds you to reach out to the people who matter, before weeks turn into months without a word. Add your circle, set a cadence, and let the app do the remembering.</p>
-    <div id="hero-waitlist">
-      <div class="waitlist-form">
-        <input
-          class="waitlist-input"
-          type="text"
-          id="hero-name"
-          placeholder="Your first name"
-          autocomplete="given-name"
-          required
-        />
-        <input
-          class="waitlist-input"
-          type="email"
-          id="hero-email"
-          placeholder="Enter your email address"
-          autocomplete="email"
-          required
-        />
-        <button class="btn-primary" style="padding:13px 28px;font-size:15px;" onclick="submitWaitlist('hero')">
-          Join the waitlist
-        </button>
+  </div>
+
+  <div class="hero-visual reveal reveal-right">
+    <div class="app-preview">
+      <div class="demo-frame">
+        <img src="images/reach-out-light.png" alt="Tether dashboard showing people to reach out to with Snooze and Log actions" width="900" height="1600">
       </div>
-      <div class="waitlist-success" id="hero-success">
-        ✓ You're on the list. We'll email your invite soon. Keep an eye on Promotions or spam, just in case.
-      </div>
-      <div class="waitlist-error" id="hero-error">
-        Something went wrong. Please try again.
-      </div>
-      <div class="hero-note" id="hero-count">Free to use · No credit card required</div>
     </div>
   </div>
 
-  <div class="app-preview">
-    <div class="preview-bar">
-      <div class="preview-dots">
-        <div class="dot d-r"></div>
-        <div class="dot d-y"></div>
-        <div class="dot d-g"></div>
-      </div>
-      <div class="preview-title" id="preview-title">Tether: Your Circle</div>
+  <div id="hero-waitlist">
+    <div class="waitlist-form">
+      <input
+        class="waitlist-input"
+        type="text"
+        id="hero-name"
+        placeholder="Your first name"
+        autocomplete="given-name"
+        required
+      />
+      <input
+        class="waitlist-input"
+        type="email"
+        id="hero-email"
+        placeholder="Enter your email address"
+        autocomplete="email"
+        required
+      />
+      <button class="btn-primary" style="padding:13px 28px;font-size:15px;" onclick="submitWaitlist('hero')">
+        Join the waitlist
+      </button>
     </div>
-
-    <!-- SLIDESHOW WRAPPER -->
-    <div class="preview-slideshow">
-
-      <!-- SLIDE 1: Your Circle -->
-      <div class="preview-slide active" data-title="Tether: Your Circle">
-        <div class="preview-body">
-          <div class="preview-greeting">Good morning, Alex 👋</div>
-          <div class="preview-sub">3 people to reach out to today</div>
-          <div class="contact-row">
-            <div class="avatar av-1">M</div>
-            <div class="contact-info">
-              <div class="contact-name">Mom</div>
-              <div class="contact-meta">Last talked · 12 days ago · Weekly cadence</div>
-            </div>
-            <div class="health-dot h-red"></div>
-          </div>
-          <div class="contact-row">
-            <div class="avatar av-2">J</div>
-            <div class="contact-info">
-              <div class="contact-name">Jordan</div>
-              <div class="contact-meta">Last talked · 3 weeks ago · Monthly cadence</div>
-            </div>
-            <div class="health-dot h-amber"></div>
-          </div>
-          <div class="contact-row">
-            <div class="avatar av-3">D</div>
-            <div class="contact-info">
-              <div class="contact-name">Dr. Williams</div>
-              <div class="contact-meta">Last talked · 2 months ago · Quarterly cadence</div>
-            </div>
-            <div class="health-dot h-amber"></div>
-          </div>
-          <div class="preview-stats">
-            <div class="p-stat"><div class="p-stat-num">24</div><div class="p-stat-label">In Circle</div></div>
-            <div class="p-stat"><div class="p-stat-num">18</div><div class="p-stat-label">On Track</div></div>
-            <div class="p-stat"><div class="p-stat-num">41d</div><div class="p-stat-label">Streak</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 2: AI Conversation Starter -->
-      <div class="preview-slide" data-title="Tether: AI Starter">
-        <div class="preview-body">
-          <div class="preview-greeting">Reaching out to Mom ✨</div>
-          <div class="preview-sub">Suggested opener from your notes</div>
-          <div class="ai-starter-card">
-            <div class="ai-starter-label">Suggested opener</div>
-            <div class="ai-starter-text">"Hey Mom, I've been thinking about you. How did the move go last week? Hope it all went smoothly."</div>
-            <div class="ai-starter-actions">
-              <button class="ai-btn ai-btn-primary">Copy message</button>
-              <button class="ai-btn ai-btn-ghost">Try another</button>
-            </div>
-          </div>
-          <div class="contact-row" style="margin-top:12px;">
-            <div class="avatar av-1">M</div>
-            <div class="contact-info">
-              <div class="contact-name">Mom</div>
-              <div class="contact-meta">Weekly cadence · Overdue by 5 days</div>
-            </div>
-            <div class="health-dot h-red"></div>
-          </div>
-          <div class="preview-stats">
-            <div class="p-stat"><div class="p-stat-num">✓</div><div class="p-stat-label">From notes</div></div>
-            <div class="p-stat"><div class="p-stat-num">3</div><div class="p-stat-label">Suggestions</div></div>
-            <div class="p-stat"><div class="p-stat-num">1</div><div class="p-stat-label">Tap copy</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 3: Birthday Reminder -->
-      <div class="preview-slide" data-title="Tether: Upcoming Events">
-        <div class="preview-body">
-          <div class="preview-greeting">Upcoming moments 🎂</div>
-          <div class="preview-sub">Don't miss these this month</div>
-          <div class="contact-row">
-            <div class="avatar av-2" style="background:var(--rose-l);color:var(--rose);">S</div>
-            <div class="contact-info">
-              <div class="contact-name">Sarah's Birthday</div>
-              <div class="contact-meta">In 3 days · Close friend · Add a note?</div>
-            </div>
-            <div class="event-badge" style="background:var(--rose-l);color:var(--rose);font-size:9px;padding:3px 8px;border-radius:100px;white-space:nowrap;">3 days</div>
-          </div>
-          <div class="contact-row">
-            <div class="avatar av-3" style="background:var(--amber-l);color:var(--amber);">R</div>
-            <div class="contact-info">
-              <div class="contact-name">Work Anniversary: Rob</div>
-              <div class="contact-meta">In 8 days · Mentor · 5 years together</div>
-            </div>
-            <div class="event-badge" style="background:var(--amber-l);color:var(--amber);font-size:9px;padding:3px 8px;border-radius:100px;white-space:nowrap;">8 days</div>
-          </div>
-          <div class="contact-row">
-            <div class="avatar av-1">T</div>
-            <div class="contact-info">
-              <div class="contact-name">Dad's Birthday</div>
-              <div class="contact-meta">In 14 days · Family · Call or card?</div>
-            </div>
-            <div class="event-badge" style="background:var(--green-l);color:var(--green);font-size:9px;padding:3px 8px;border-radius:100px;white-space:nowrap;">14 days</div>
-          </div>
-          <div class="preview-stats">
-            <div class="p-stat"><div class="p-stat-num">3</div><div class="p-stat-label">This Month</div></div>
-            <div class="p-stat"><div class="p-stat-num">11</div><div class="p-stat-label">This Year</div></div>
-            <div class="p-stat"><div class="p-stat-num">0</div><div class="p-stat-label">Missed</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 4: Monthly Report -->
-      <div class="preview-slide" data-title="Tether: Monthly Report">
-        <div class="preview-body">
-          <div class="preview-greeting">Your May report 📊</div>
-          <div class="preview-sub">Here is how you showed up this month</div>
-          <div class="report-row">
-            <div class="report-label">Connections made</div>
-            <div class="report-bar-wrap"><div class="report-bar" style="width:85%;background:var(--green);"></div></div>
-            <div class="report-val" style="color:var(--green);">17</div>
-          </div>
-          <div class="report-row">
-            <div class="report-label">On-time outreach</div>
-            <div class="report-bar-wrap"><div class="report-bar" style="width:72%;background:var(--green);"></div></div>
-            <div class="report-val" style="color:var(--green);">72%</div>
-          </div>
-          <div class="report-row">
-            <div class="report-label">Missed this month</div>
-            <div class="report-bar-wrap"><div class="report-bar" style="width:20%;background:var(--rose);"></div></div>
-            <div class="report-val" style="color:var(--rose);">4</div>
-          </div>
-          <div class="report-row">
-            <div class="report-label">Streak maintained</div>
-            <div class="report-bar-wrap"><div class="report-bar" style="width:100%;background:var(--amber);"></div></div>
-            <div class="report-val" style="color:var(--amber);">41d</div>
-          </div>
-          <div class="preview-stats" style="margin-top:14px;">
-            <div class="p-stat"><div class="p-stat-num" style="color:var(--green);">+3</div><div class="p-stat-label">vs April</div></div>
-            <div class="p-stat"><div class="p-stat-num">24</div><div class="p-stat-label">In Circle</div></div>
-            <div class="p-stat"><div class="p-stat-num">🔥</div><div class="p-stat-label">Best Month</div></div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end slideshow -->
-
-    <!-- SLIDE INDICATORS -->
-    <div class="slide-indicators">
-      <button class="slide-dot active" onclick="goToSlide(0)"></button>
-      <button class="slide-dot" onclick="goToSlide(1)"></button>
-      <button class="slide-dot" onclick="goToSlide(2)"></button>
-      <button class="slide-dot" onclick="goToSlide(3)"></button>
+    <div class="waitlist-success" id="hero-success">
+      ✓ You're on the list. I'll email your invite soon. Keep an eye on Promotions or spam, just in case.
     </div>
-
+    <div class="waitlist-error" id="hero-error">
+      Something went wrong. Please try again.
+    </div>
+    <div class="hero-note" id="hero-count">Free to use · No credit card required</div>
   </div>
 </div>
 
@@ -1711,24 +1661,50 @@ footer {
 <!-- HOW IT WORKS -->
 <div class="section" id="how">
   <div class="section-eyebrow" style="margin-bottom:20px;">How it works</div>
-  <div class="section-title" style="margin-bottom:24px;">Simple enough to<br>actually stick to</div>
-  <div class="section-sub" style="margin-bottom:64px;">Three steps. No complicated setup. Just you and the people you care about.</div>
+  <div class="section-title" style="margin-bottom:24px;">Built around how<br>relationships actually work</div>
+  <div class="section-sub" style="margin-bottom:40px;">No busywork, no guilt, no complicated setup. Just the people you care about, and a little help remembering them.</div>
 
-  <div class="steps">
-    <div class="step reveal reveal-delay-1">
-      <div class="step-num">01</div>
-      <h3>Build your circle</h3>
-      <p>Add the people who matter: family, close friends, mentors. Start with one person, or paste your whole list at once. Set how often you want to be in touch with each one.</p>
+  <div class="demo-stack">
+    <div class="demo-row">
+      <div class="demo-copy reveal reveal-left">
+        <div class="step-num">01</div>
+        <h3>Add the people who matter</h3>
+        <p>Bring in family, friends, mentors, anyone you don't want to drift from. Choose a relationship type, set how often you want to connect, and Tether starts keeping the rhythm for you.</p>
+      </div>
+      <div class="demo-media reveal reveal-right reveal-delay-1">
+        <div class="demo-frame">
+          <img src="images/add-contact.png" alt="Add someone who matters modal with relationship chips and cadence options" width="900" height="1600">
+        </div>
+      </div>
     </div>
-    <div class="step reveal reveal-delay-2">
-      <div class="step-num">02</div>
-      <h3>Get gentle reminders</h3>
-      <p>See who's due on your dashboard, and get a gentle email digest when digests are on—no guilt, just a nudge.</p>
+
+    <div class="demo-row demo-row-flip">
+      <div class="demo-copy reveal reveal-right reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3>Get a nudge that actually reads the room</h3>
+        <p>See who's overdue and ready to log, who's coming up this week, and when the board is clear with "No one needs a nudge right now." Three different signals, not one blunt alert.</p>
+      </div>
+      <div class="demo-media reveal reveal-left">
+        <div class="demo-frame">
+          <img src="images/coming-up-light.png" alt="Coming up this week carousel with contacts due soon" width="900" height="1600">
+        </div>
+        <div class="demo-frame">
+          <img src="images/dashboard.png" alt="Today view when no one needs a nudge right now" width="900" height="1600">
+        </div>
+      </div>
     </div>
-    <div class="step reveal reveal-delay-3">
-      <div class="step-num">03</div>
-      <h3>Log and move on</h3>
-      <p>Reach out, log the interaction in two taps, and let Tether reset the clock. The app does the tracking so your brain does not have to.</p>
+
+    <div class="demo-row">
+      <div class="demo-copy reveal reveal-left">
+        <div class="step-num">03</div>
+        <h3>Reach out, log it, done</h3>
+        <p>Pick how you connected, add a note if you want, and log it in two taps. The clock resets, and your history keeps what mattered.</p>
+      </div>
+      <div class="demo-media reveal reveal-right reveal-delay-1">
+        <div class="demo-frame">
+          <img src="images/log-interaction-light.png" alt="Log interaction modal with connection types, journal notes, and date" width="900" height="1600">
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1737,39 +1713,107 @@ footer {
 <div class="features-section" id="features">
   <div class="features-inner">
     <div class="section-eyebrow">Features</div>
-    <div class="section-title">Designed around<br>real relationships</div>
-    <div class="section-sub" style="margin-bottom:40px;">Not a CRM. Not a task manager. Just a thoughtful companion for staying connected.</div>
+    <div class="section-title">Everything it takes to<br>actually stay close</div>
+    <div class="section-sub" style="margin-bottom:40px;">Not a CRM. Not another inbox to manage. A quiet companion that pays attention so you don't have to.</div>
 
-    <div class="features-grid">
-      <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon">💚</div>
-        <h3>Relationship health view</h3>
-        <p>Color-coded indicators show at a glance who is thriving in your circle and who is slipping, before it has been too long.</p>
+    <div class="demo-stack">
+      <div class="demo-row">
+        <div class="demo-copy reveal reveal-left">
+          <h3>A rhythm for every relationship</h3>
+          <p>Weekly, biweekly, monthly, quarterly, annually, or custom. Set the pace that fits each person, not one schedule for everyone.</p>
+        </div>
+        <div class="demo-media reveal reveal-right reveal-delay-1">
+          <div class="demo-frame">
+            <img src="images/cadence.png" alt="Cadence picker with weekly through annually and custom options" width="900" height="1600">
+          </div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-2">
-        <div class="feat-icon">✨</div>
-        <h3>AI conversation starters</h3>
-        <p>Not sure what to say after a while? Tether generates warm, personal openers grounded in the notes and recent conversations you've saved about that person.</p>
+
+      <div class="demo-row demo-row-flip">
+        <div class="demo-copy reveal reveal-right reveal-delay-1">
+          <h3>Never stare at a blank text box</h3>
+          <p>Get ready-to-send openers grounded in what you've shared about someone, then copy a starter and go.</p>
+        </div>
+        <div class="demo-media reveal reveal-left">
+          <div class="demo-frame">
+            <img src="images/conversation-starters-light.png" alt="Conversation starters with copy starter actions" width="900" height="1600">
+          </div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-3">
-        <div class="feat-icon">📅</div>
-        <h3>Custom cadences</h3>
-        <p>Weekly for your parents. Monthly for close friends. Quarterly for mentors. Set the right rhythm for each relationship.</p>
+
+      <div class="demo-row">
+        <div class="demo-copy reveal reveal-left">
+          <h3>See how every relationship is doing</h3>
+          <p>Open a person and see last talked, cadence, next due, streak, and whether they're on track or overdue, without digging through a long list.</p>
+        </div>
+        <div class="demo-media reveal reveal-right reveal-delay-1">
+          <div class="demo-frame">
+            <img src="images/contact-profile-light.png" alt="Contact profile showing last talked, custom cadence, and overdue status" width="900" height="1600">
+          </div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-4">
-        <div class="feat-icon">📬</div>
-        <h3>Daily digest emails</h3>
-        <p>A gentle email showing who is due to hear from you, so staying close doesn't depend on memory alone.</p>
+
+      <div class="demo-row demo-row-flip">
+        <div class="demo-copy reveal reveal-right reveal-delay-1">
+          <h3>Dates worth remembering</h3>
+          <p>Birthdays and milestones live in one place across your circle, searchable and filterable when you need them.</p>
+        </div>
+        <div class="demo-media reveal reveal-left">
+          <div class="demo-frame">
+            <img src="images/events.png" alt="Events list with birthdays for people in your circle" width="900" height="1600">
+          </div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-5">
-        <div class="feat-icon">🎂</div>
-        <h3>Birthday &amp; custom reminders</h3>
-        <p>Add birthdays, anniversaries, or any date that matters. Tether reminds you ahead of time so you never miss a moment worth acknowledging.</p>
+
+      <div class="demo-row">
+        <div class="demo-copy reveal reveal-left">
+          <h3>Turn any date into a reminder, instantly</h3>
+          <p>On desktop, drag an event straight into your reminders. It opens pre-filled with the contact, note, time, and a clear "Reminds you" preview, no retyping, no extra taps.</p>
+        </div>
+        <div class="demo-media reveal reveal-right reveal-delay-1">
+          <div class="demo-frame">
+            <img src="images/add-reminder-light.png" alt="Add to reminders modal with contact, note, when to remind, and reminds you preview" width="900" height="1600">
+          </div>
+          <div class="demo-frame">
+            <img src="images/reminders-board.png" alt="Reminders board with search, status filters, and a birthday reminder" width="900" height="1600">
+          </div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-5">
-        <div class="feat-icon">📊</div>
-        <h3>Monthly relationship report</h3>
-        <p>A personal digest of who you showed up for, who you missed, and what patterns are forming in how you stay connected.</p>
+
+      <div class="demo-row demo-row-flip">
+        <div class="demo-copy reveal reveal-right reveal-delay-1">
+          <h3>Reminders that keep watch for you</h3>
+          <p>Pending birthday and event reminders show who, when, and status, so the important dates don't slip.</p>
+        </div>
+        <div class="demo-media reveal reveal-left">
+          <div class="demo-frame">
+            <img src="images/reminders-light.png" alt="Reminders tab with pending birthday reminders" width="900" height="1600">
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-row">
+        <div class="demo-copy reveal reveal-left">
+          <h3>A monthly report that roots for you</h3>
+          <p>See connections made, what you missed, how you compare to last month, and the size of your circle. No guilt, just the story of how you showed up.</p>
+        </div>
+        <div class="demo-media reveal reveal-right reveal-delay-1">
+          <div class="demo-frame">
+            <img src="images/monthly-report.png" alt="Monthly report with connections made and circle size" width="900" height="1600">
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-row demo-row-flip">
+        <div class="demo-copy reveal reveal-right reveal-delay-1">
+          <h3>A daily digest in your inbox</h3>
+          <p>Each day, a simple note of who's worth a moment and what's coming up this week, with one tap back into Tether.</p>
+        </div>
+        <div class="demo-media reveal reveal-left">
+          <div class="demo-frame demo-frame--digest">
+            <img src="images/daily-digest.png" alt="Daily digest email listing people to reach out to and upcoming birthdays" width="900" height="1600">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1839,7 +1883,7 @@ footer {
   </div>
 
   <div class="ea-success" id="ea-success">
-    ✓ You're on the list. We'll email your invite soon. Keep an eye on Promotions or spam, just in case.
+    ✓ You're on the list. I'll email your invite soon. Keep an eye on Promotions or spam, just in case.
   </div>
   <div class="ea-error" id="ea-error">
     Something went wrong. Please try again.
@@ -2092,6 +2136,7 @@ document.addEventListener('keydown', (e) => {
 
 (function() {
   const slides     = Array.from(document.querySelectorAll('.preview-slide'));
+  if (!slides.length) return;
   const dots       = Array.from(document.querySelectorAll('.slide-dot'));
   const titleEl    = document.getElementById('preview-title');
   const directions = ['left', 'right', 'up', 'down'];
@@ -2186,16 +2231,35 @@ document.addEventListener('keydown', (e) => {
   const els = document.querySelectorAll('.reveal');
   if (!els.length) return;
 
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  // threshold 0: intersect = any pixel visible. Reset only when fully gone.
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
+      const el = entry.target;
 
-  els.forEach(el => observer.observe(el));
+      if (!entry.isIntersecting) {
+        el.style.transition = 'none';
+        el.classList.remove('visible');
+        void el.offsetWidth;
+        el.style.transition = '';
+        el.dataset.ready = '1';
+        return;
+      }
+
+      if (el.dataset.ready === '0') return;
+      el.dataset.ready = '0';
+      requestAnimationFrame(() => el.classList.add('visible'));
+    });
+  }, { threshold: 0 });
+
+  els.forEach(el => {
+    el.dataset.ready = '1';
+    observer.observe(el);
+  });
 })();
 
 function animateCounter(el, target, suffix) {
