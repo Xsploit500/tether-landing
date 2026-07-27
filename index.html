@@ -1035,15 +1035,28 @@ footer {
   .waitlist-form .btn-primary {
     width: 100%;
   }
-  .hero-visual,
-  .app-preview,
-  .hero-visual .demo-frame,
-  .app-preview .demo-frame {
+  .hero-visual {
     width: 100%;
     max-width: none;
-    margin: 0;
+    padding: 0;
   }
-  .app-preview {
+  .hero-visual .app-preview {
+    display: block;
+    width: auto;
+    max-width: none;
+    margin: 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow:
+      0 0 0 1px var(--border),
+      0 24px 64px rgba(42,107,60,0.08),
+      0 2px 8px rgba(0,0,0,0.04);
+    overflow: hidden;
+    background: var(--preview-bg);
+  }
+  .hero-visual .app-preview .demo-frame {
+    width: 100%;
+    margin: 0;
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -1086,15 +1099,22 @@ footer {
   }
   .demo-media {
     width: 100%;
+    padding: 0;
   }
-  .demo-frame,
+  .demo-media .demo-frame,
+  .features-section .demo-media .demo-frame,
   .features-section .demo-frame--digest {
+    display: block;
+    width: auto;
     max-width: none;
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+    margin: 0 16px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow:
+      0 0 0 1px var(--border),
+      0 20px 50px -24px rgba(26, 24, 20, 0.45);
+    overflow: hidden;
   }
   .features-section {
     padding: 48px 0;
