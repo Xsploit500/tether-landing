@@ -132,14 +132,15 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: clip;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Geist', sans-serif;
-  overflow-x: hidden;
+  /* clip (not hidden): overflow-x:hidden on body breaks position:fixed
+     headers on iOS Safari after refresh/scroll restoration. */
+  overflow-x: clip;
   padding-top: var(--nav-h);
   transition: background 0.3s, color 0.3s;
 }
